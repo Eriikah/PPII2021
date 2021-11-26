@@ -1,7 +1,8 @@
 Architecture de la base de données
 
-table user:
-user_id(int)
+- table user:
+
+**user_id**(int)
 password_hash(varchar) 
 name(varchar)
 email(varchar)
@@ -9,9 +10,11 @@ rôle(varchar)
 statut(varchar)
 mod_status(int)
 
-table proposition:
-prop_id(int)
-#poster_id(int)
+
+- table proposition:
+
+**prop_id**(int)
+_poster_id_(int)
 content(text)
 title(varchar<128)
 vote_pos(int)
@@ -20,15 +23,18 @@ post_time(timestamp)
 deadline(timestamp)
 tags(varchar)(avec un max de 3 tags)
 
-table vote:
-vote_id(int)
+
+- table vote:
+
+**vote_id**(int)
 vote_on(varchar)
-#parent_id(int)
+_parent_id_(int)
 user_id(int)
 vote_time(timestamp)
 
-table commentaire:
-comment_id(int)
+
+- table commentaire:
+**comment_id**(int)
 #prop_id(int)
 #poster_id(int)
 content(text)
@@ -38,27 +44,31 @@ like(int)
 dislike(int)
 
 
-table enquête:
-survey_id(int)
+
+- table enquête:
+**survey_id**(int)
 title(varchar)
 description(text)
 post_time(timestamp)
 deadline(timestamp)
 
-table questions:
-question_id(int)
-#survey_id(int)
+
+- table questions:
+**question_id**(int)
+_survey_id_(int)
 question_nb(int)
 content(varchar)
 
-table answer:
-answ_id(int)
-#question_id(int)
+
+- table answer:
+**answ_id**(int)
+_question_id_(int)
 content(text)
 time(timestamp)
 
-Table annuaire
-service_id(int)
+
+- Table annuaire:
+**service_id**(int)
 nom (varchar)
 adresse (varchar)
 telephone(varchar)
