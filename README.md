@@ -9,11 +9,11 @@ Gérald Oster <<gerald.oster@telecomnancy.eu>>
 [Le sujet détaillé est disponible en version PDF](./Projet_2021_DP.pdf)
 
 **Membres du groupe** :
-- À compléter
-- À compléter
-- À compléter
-- À compléter
+- François MERAT
+- Camille MOUSSU
+- Tom BENE
+- Alexandre DESCAMPS
 
 ## Description du projet
 
-À compléter
+
