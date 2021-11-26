@@ -16,7 +16,7 @@ Gérald Oster <<gerald.oster@telecomnancy.eu>>
 
 ## Description du projet
 
-# Application Ekklesia # - Plateforme de communication mairie/citoyens
+# Application Ekklesia - Plateforme de communication mairie/citoyens
 
 ## Objectifs
 
