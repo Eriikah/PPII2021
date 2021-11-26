@@ -16,4 +16,26 @@ Gérald Oster <<gerald.oster@telecomnancy.eu>>
 
 ## Description du projet
 
+# Application ParticipaTeam # - Plateforme de communication mairie/citoyens
 
+## Objectifs
+
+**Objectifs principaux**
+
+- Mettre en place une interface entre les citoyens et la mairie.
+- Consulter les citoyens via des sondages.
+- Mettre en avant les projets de la commune et recueillir leurs avis.
+
+**Objectifs annexes**
+
+- Informer les citoyens des évenements en cours (fil d'actualité)
+- Permettre au citoyens de proposer des idées
+- Proposer un login sécurisé et respecter la RGPD
+
+## Algorithmie
+
+- Algorithmes de recherche avec système de tags
+- Tri des propositions par ordre de like/dislike
+- Login
+- Section commentaire
+- Tri des actualités par pertinence
