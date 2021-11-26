@@ -1,10 +1,11 @@
 Architecture de la base de données
 
-- table user:/n
+- table user:
 
-**user_id**(int)/n
+**user_id**(int)
 password_hash(varchar) 
 name(varchar)
+
 email(varchar)
 rôle(varchar)
 statut(varchar)
