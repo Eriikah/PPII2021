@@ -1,6 +1,6 @@
 Architecture de la base de données
 
-- table user:
+* table user:
 
  * **user_id**(int)
  * password_hash(varchar) 
@@ -11,7 +11,7 @@ Architecture de la base de données
  * mod_status(int)
 
 
-- table proposition:
+* table proposition:
 
  * **prop_id**(int)
  * _poster_id_(int)
@@ -31,7 +31,7 @@ Architecture de la base de données
  * user_id(int)
  * vote_time(timestamp)
 
-- table commentaire:
+* table commentaire:
 
  * **comment_id**(int)
  * _prop_id_(int)
@@ -45,7 +45,7 @@ Architecture de la base de données
 
 
 
-- table enquête:
+* table enquête:
 
  * **survey_id**(int)
  * title(varchar)
@@ -53,7 +53,7 @@ Architecture de la base de données
  * post_time(timestamp)
  * deadline(timestamp)
 
-- table questions:
+* table questions:
 
  * **question_id**(int)
  * _survey_id_(int)
@@ -61,7 +61,7 @@ Architecture de la base de données
  * content(varchar)
 
 
-- table answer:
+* table answer:
 
  * **answ_id**(int)
  * _question_id_(int)
@@ -69,7 +69,7 @@ Architecture de la base de données
  * time(timestamp)
 
 
-- Table annuaire:
+* Table annuaire:
 
  * **service_id**(int)
  * nom (varchar)
