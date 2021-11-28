@@ -1,6 +1,7 @@
 **Architecture de la base de données**
 
-#table user:
+#Tables pour les objectifs importants
+## table user:
 
  * **user_id**(int)
  * password_hash(varchar) 
@@ -11,7 +12,7 @@
  * mod_status(int)
 
 
-#table proposition:
+## table proposition:
 
  * **prop_id**(int)
  * _poster_id_(int)
@@ -23,7 +24,7 @@
  * deadline(timestamp)
  * tags(varchar)(avec un max de 3 tags)
 
-#table vote:
+## table vote:
 
  * **vote_id**(int)
  * vote_on(varchar)
@@ -31,7 +32,10 @@
  * user_id(int)
  * vote_time(timestamp)
 
-#table commentaire:
+
+# Tables pour les fonctionnalitées annexes
+
+## table commentaire:
 
  * **comment_id**(int)
  * _prop_id_(int)
@@ -42,7 +46,7 @@
  * like(int)
  * dislike(int)
 
-#table enquête:
+## table enquête:
 
  * **survey_id**(int)
  * title(varchar)
@@ -50,7 +54,7 @@
  * post_time(timestamp)
  * deadline(timestamp)
 
-#table questions:
+## table questions:
 
  * **question_id**(int)
  * _survey_id_(int)
@@ -58,7 +62,7 @@
  * content(varchar)
 
 
-#table answer:
+## table answer:
 
  * **answ_id**(int)
  * _question_id_(int)
@@ -66,7 +70,7 @@
  * time(timestamp)
 
 
-#Table annuaire:
+## Table annuaire:
 
  * **service_id**(int)
  * nom (varchar)
