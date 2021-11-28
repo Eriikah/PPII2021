@@ -23,8 +23,7 @@ Gérald Oster <<gerald.oster@telecomnancy.eu>>
 **Objectifs principaux**
 
 - Mettre en place une interface entre les citoyens et la mairie.
-- Consulter les citoyens via des sondages.
-- Mettre en avant les projets de la commune et recueillir leurs avis.
+- Mettre en avant les projets de la commune de façon personnalisée pour les citoyens
 
 **Objectifs annexes**
 
@@ -34,8 +33,8 @@ Gérald Oster <<gerald.oster@telecomnancy.eu>>
 
 ## Algorithmie
 
+- Tri des actualités par pertinence
 - Algorithmes de recherche avec système de tags
+- Algorithmes de recherche avec système lexicographique
 - Tri des propositions par ordre de like/dislike
 - Login
-- Section commentaire
-- Tri des actualités par pertinence
