@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<form method="post">
-    <input type="text" name="name" id="name_input" placeholder='Name'>
-    <input type="text" name="surname" id="surname_input" placeholder='Surname'>
-    <input type="email" name="email" id="email_input" placeholder='Email'>
-    <input type="password" name="password" id="pwd_input" placeholder='Password'>
-    <input type="password" name="re_password" id="re_pwd_input" placeholder='Confirm password'>
-    <button type="submit">Login</button>
+<div class="title1"><p>REGISTER</p></div>
+<form class="container" method="post">
+    <div><input class="textbox" type="text" name="name" id="name_input" placeholder='Name'></div>
+    <div><input class="textbox" type="text" name="surname" id="surname_input" placeholder='Surname'></div>
+    <div><input class="textbox" type="email" name="email" id="email_input" placeholder='Email'></div>
+    <div><input class="textbox" type="password" name="password" id="pwd_input" placeholder='Password'></div>
+    <div><input class="textbox" type="password" name="re_password" id="re_pwd_input" placeholder='Confirm password'></div>
+    <div><button class="button1" type="submit">Login</button></div>
     </form>
 {% endblock %}

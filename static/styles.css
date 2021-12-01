@@ -76,13 +76,13 @@ li {
  .container{
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: #001c33;
   font-size: 110%;
   font-weight: bold;
   size: 30%;
 }
 
 .container div{
+  color: #001c33;
   margin-top: 5%;
   align-items: center;
 }
@@ -92,6 +92,17 @@ li {
   padding: 10px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+}
+
+.title1{
+  text-align:center ;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #001c33;
+  margin-top: 5%;
+  font-size: 50px;
+  font-weight: bold;
+
+
 }
 
 .button1{
