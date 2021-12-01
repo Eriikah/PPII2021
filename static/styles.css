@@ -1,12 +1,6 @@
 body {
-    background-color: rgb(181, 176, 230);
-  }
-  h1 {
-    color: blue;
-  }
-  p {
-    color: red;
-  }
+  background-color: rgb(181, 176, 230);
+}
 
   /* UTILITIES */
 * {
@@ -14,18 +8,11 @@ body {
   padding: 0;
   box-sizing: border-box;
  }
- a {
+a {
   text-decoration: none;
  }
- li {
+li {
   list-style: none;
- }
-
-/*HAMBURGER MENU*/
-.hamburger {
-  display: none;
-  font-size: 24px;
-  user-select: none;
  }
 
  /* NAVBAR STYLING STARTS */
@@ -34,53 +21,86 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-   background-color: rgb(33, 43, 138);
+  background-color: rgb(33, 43, 138);
   color: #fff;
  }
   /* LOGO */
- .titre {
+.titre {
   font-family: Impact;
   font-size: 30px;
  }
  /* NAVBAR MENU */
- .connect {
+.connect {
   text-align: right;
   color:rgb(255, 255, 255);
   background-color: crimson;
   border-radius: 5px;
  } 
 
- .connect a {
+.connect a {
   color:rgb(0, 255, 255);
  }
- .menu {
+.menu {
   display: flex;
   gap: 2em;
   font-family: Verdana;;
   font-size: 20px;
  }
 
- .menu a{
+.menu a{
   color:azure;
  }
 
- .menu  div:hover {
+.menu  div:hover {
   background-color: #7085a1;
   border-radius: 5px;
   transition: 0.3s ease;
  }
- .menu div {
+.menu div {
   padding: 5px 14px;
  }
  /* DROPDOWN MENU */
- .services {
+.services {
   position: relative; 
  }
 
- .bas{
+.bas{
   position: absolute;
   bottom: 0;
   width: 100%;
   background-color: #88888863;
   text-align: center;
  }
+ 
+ 
+ .container{
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #001c33;
+  font-size: 110%;
+  font-weight: bold;
+  size: 30%;
+}
+
+.container div{
+  margin-top: 5%;
+  align-items: center;
+}
+
+.textbox{
+  width: 50%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.button1{
+  background-color: #34179c; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 100%;
+  padding: 10px 12px;
+}
