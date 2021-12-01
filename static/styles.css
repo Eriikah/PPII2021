@@ -1,0 +1,86 @@
+body {
+    background-color: rgb(181, 176, 230);
+  }
+  h1 {
+    color: blue;
+  }
+  p {
+    color: red;
+  }
+
+  /* UTILITIES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+ }
+ a {
+  text-decoration: none;
+ }
+ li {
+  list-style: none;
+ }
+
+/*HAMBURGER MENU*/
+.hamburger {
+  display: none;
+  font-size: 24px;
+  user-select: none;
+ }
+
+ /* NAVBAR STYLING STARTS */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+   background-color: rgb(33, 43, 138);
+  color: #fff;
+ }
+  /* LOGO */
+ .titre {
+  font-family: Impact;
+  font-size: 30px;
+ }
+ /* NAVBAR MENU */
+ .connect {
+  text-align: right;
+  color:rgb(255, 255, 255);
+  background-color: crimson;
+  border-radius: 5px;
+ } 
+
+ .connect a {
+  color:rgb(0, 255, 255);
+ }
+ .menu {
+  display: flex;
+  gap: 2em;
+  font-family: Verdana;;
+  font-size: 20px;
+ }
+
+ .menu a{
+  color:azure;
+ }
+
+ .menu  div:hover {
+  background-color: #7085a1;
+  border-radius: 5px;
+  transition: 0.3s ease;
+ }
+ .menu div {
+  padding: 5px 14px;
+ }
+ /* DROPDOWN MENU */
+ .services {
+  position: relative; 
+ }
+
+ .bas{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #88888863;
+  text-align: center;
+ }
