@@ -89,9 +89,10 @@ li {
 
 .textbox{
   width: 50%;
-  padding: 10px 20px;
+  padding: 8px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 .title1{
