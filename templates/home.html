@@ -1,61 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href=..\static\styles.css>
-    <title>Ekklesia</title>
-</head>
-<body> 
-        
-        
-        </nav>
-        <div class="row" style="margin-top:50px">
-            <div class="col-2">
-                <div class="flex-shrink-0 p-3 bg-white align-items-right d-flex flex-row-reverse">
-                <ul class="list-unstyled ps-0">
-                    <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#fise-collapse" aria-expanded="true">
-                        <b>FISE</b>
-                    </button>
-                    <div class="collapse show" id="fise-collapse">
-                        <ul class="btn-toggle-nav fw-normal pb-1 small" style="list-style: none">
-                        <li><a href="/lists/FISE/1" class="link-primary rounded">1A</a></li>
-                        <li><a href="/lists/FISE/2" class="link-primary rounded">2A</a></li>
-                        <li><a href="/lists/FISE/3" class="link-primary rounded">3A</a></li>
-                        </ul>
-                    </div>
-                    </li>
-                    <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#fisa-collapse" aria-expanded="false">
-                        <b>FISA</b>
-                    </button>
-                    <div class="collapse show" id="fisa-collapse">
-                        <ul class="btn-toggle-nav fw-normal pb-1 small" style="list-style: none">
-                        <li><a href="/lists/FISA/1" class="link-primary rounded">1A</a></li>
-                        <li><a href="/lists/FISA/2" class="link-primary rounded">2A</a></li>
-                        <li><a href="/lists/FISA/3" class="link-primary rounded">3A</a></li>
-                        </ul>
-                    </div>
-                    </li>
-                </ul>
-                </div>
-            </div>
-            <div class="col-auto">
-                <div class="container">
-                    <div class="row">
-                        {% for student in students %}
-                        <div class="col-auto">
-                            <p class="text-center"><img src="{{ url_for('static', filename=student['image']) }}" height="169px;" style="border-radius: 15px;"></p>
-                            <p class="text-center">{{ student['nom'] }}</p>
-                            <p class="text-center text-secondary">{{ student['id'] }}</p>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </body>
-</body>
-</html>
+{% extends "base.html" %} 
+
+
+
+{% block content %}
+<h1>Hello</h1>
+{% endblock% }
