@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask import render_template, request, abort
+from flask import render_template, request, abort, url_for
 from hashlib import sha256
 
 app = Flask(__name__)
@@ -15,7 +15,8 @@ db.create_all()
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    articles = Article.query.all()
+    return render_template('home.html', articles=[])
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -42,3 +43,5 @@ def login():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     return render_template('register.html')
+
+

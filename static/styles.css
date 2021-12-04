@@ -20,13 +20,14 @@ li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 2%;
   background-color: rgb(33, 43, 138);
   color: #fff;
  }
   /* LOGO */
 .titre {
-  font-family: Impact;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: bold;
   font-size: 30px;
  }
  /* NAVBAR MENU */
@@ -43,7 +44,7 @@ li {
 .menu {
   display: flex;
   gap: 2em;
-  font-family: Verdana;;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 20px;
  }
 
@@ -115,4 +116,32 @@ li {
   display: inline-block;
   font-size: 100%;
   padding: 10px 12px;
+}
+
+
+.bulle{
+  background-color: rgb(233, 236, 255);
+  margin: 10%;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  transition: box-shadow 0.2s;
+
+}
+
+.imgdesc{
+  width: 50%;
+
+}
+
+.title2{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #001c33;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.desc{
+  color: gray;
+  font-family: sans-serif;
 }
