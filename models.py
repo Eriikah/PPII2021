@@ -1,4 +1,5 @@
 from app import db
+from datetime import date
 
 class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
@@ -17,8 +18,8 @@ class Article(db.Model):
     vote_neg = db.Column(db.Integer)
     content = db.Column(db.String(128))
     description = db.Column(db.String(1024))
-    post_time = db.Column(db.Time)
-    deadline = db.Column(db.Time)
+    post_time = db.Column(db.Date)
+    deadline = db.Column(db.Date)
     tag1 = db.Column(db.String(16))
     tag2 = db.Column(db.String(16))
     tag3 = db.Column(db.String(16))
