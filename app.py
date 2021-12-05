@@ -45,3 +45,7 @@ def register():
     return render_template('register.html')
 
 
+@app.route('/project/<article_id>')
+def project(article_id):
+    article = Article.query.filter_by(article_id=article_id)
+    return render_template('project.html', article=[])

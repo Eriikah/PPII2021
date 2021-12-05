@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <a href='/project/test'>
-        <div class="bulle">
-
+<div class="bulle">
+    <a href='/'>
         <h1  class="title2">
             titre test
         </h1>
@@ -12,10 +11,7 @@
 
             
         </article>
-    </div>
-</a>
-        {% for article in articles %}
-    <a href='/project/ {{ article.article_id }}'>
+        
         <div class="bulle">
             <h1>
                 {{ article.title }}
@@ -23,8 +19,6 @@
             <article  class="desc">
                 {{ article.description }}
             </article>
-    
-        </div>
     </a>
-    {% endfor %}
+    </div>
 {% endblock %}
