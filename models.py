@@ -28,4 +28,5 @@ class Vote(db.Model):
     vote_on = db.Column(db.String(32))
     parent_id= db.Column(db.Integer)
     user_id = db.Column(db.Integer)
+    user_vote = db.Column(db.Integer)
     vote_time = db.Column(db.DateTime)
