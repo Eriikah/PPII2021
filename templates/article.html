@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bulle">
+    <h1  class="title2">
+        {{ article.title }}
+    </h1>
+    <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
+    <article class="content">
+        {{ article.content }}
+        
+    </article>
+    <div>
+        {% if logged_in %}
+        <button class="like">Pour</button>
+        <button class="dislike">Contre</button>
+        {% else %}
+        <a href="/login"><p class="no_connect">Connectez vous pour voter</p></a>
+        {% endif %}
+    </div>
+</div>
+       
+{% endblock %}

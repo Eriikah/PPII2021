@@ -16,7 +16,7 @@ db.create_all()
 @app.route('/')
 def home():
     articles = Article.query.all()
-    return render_template('home.html', articles=[])
+    return render_template('home.html',articles=articles)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -47,5 +47,5 @@ def register():
 
 @app.route('/project/<article_id>')
 def project(article_id):
-    article = Article.query.filter_by(article_id=article_id)
-    return render_template('project.html', article=[])
+    article = Article.query.filter_by(article_id=article_id).first()
+    return render_template('article.html', article=article)
