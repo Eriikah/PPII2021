@@ -32,7 +32,7 @@ def login():
         db_user = User.query.filter_by(email=email).first()
         if db_user is None:
             return render_template('register.html')
-        db_hash = db_user.hash
+        db_hash = db_user.password_hash
         if pwd_hash != db_hash:
             return abort(406)
         else:
