@@ -13,9 +13,9 @@
       <div class="menu">
         <div class="button0"><a href="/">Home</a></div>
         <div class="button0"><a href="/">Projets</a></div>
-        <div class="search-form"><form  method="get" autocomplete="off" >
+        <div class="search-form"><form  method="get" autocomplete="off">
           <input class="textbox1"  name="search" type="text" placeholder="Chercher projet" autofocus>
-          <button type="submit"><span class="button3">search</span></button>
+          <button type="submit" formaction="/search"><span class="button3">search</span></button>
       </form>
       </div>
       {% if logged_in %}
@@ -30,7 +30,7 @@
   </div>
 
   <footer class="bas">
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div>
       © 2021 PPII
     </div>
     

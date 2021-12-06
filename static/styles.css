@@ -74,9 +74,10 @@ li {
 
 .bas{
   position: fixed;
+  color: #fff;
   bottom: 0;
   width: 100%;
-  background-color: #88888863;
+  background-color: #af89b4;
   background-attachment: scroll;
   text-align: center;
  }
@@ -139,7 +140,7 @@ li {
 }
 
 .imgdesc{
-  width: 50%;
+  width: 30%;
 
 }
 
