@@ -1,2 +1,5 @@
-Tags visités
+Par ordre de priorité:
+
+Tags des articles où l'utilisateur a voté +
 Historique des mots clés recherchés
+Tags des articles visités
