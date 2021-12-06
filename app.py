@@ -26,18 +26,20 @@ def login():
         email = form.get('email')
         pwd = form.get('password')
         if not email or not pwd:
+            print("oui")
             return abort(406) # temporary
         h.update(pwd.encode('utf-8'))
-        pwd_hash = h.hexdigest
+        pwd_hash = h.hexdigest()
         db_user = User.query.filter_by(email=email).first()
         if db_user is None:
             return render_template('register.html')
-        db_hash = db_user.hash
+        db_hash = db_user.password_hash
         if pwd_hash != db_hash:
+            print("non")
             return abort(406)
         else:
              return render_template('home.html', logged_in=True)
-    return render_template('home.html')
+    return render_template('login.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
