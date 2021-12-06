@@ -1,22 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-    <a href='/project/test'>
-        <div class="bulle">
-
-        <h1  class="title2">
-            titre test
-        </h1>
-        <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
-        <article class="desc">
-            desctests;kjg q,j gfwudg rsgkwskdsb ksh glssdfh skjkshfk skjkshfkqf
-
-            
-        </article>
-    </div>
-</a>
-        {% for article in articles %}
+    
+{% for article in articles %}
     <a href='/project/ {{ article.article_id }}'>
         <div class="bulle">
+            <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
+     
             <h1>
                 {{ article.title }}
             </h1>
@@ -26,5 +15,5 @@
     
         </div>
     </a>
-    {% endfor %}
+{% endfor %}
 {% endblock %}
