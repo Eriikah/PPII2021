@@ -73,10 +73,11 @@ li {
  }
 
 .bas{
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   background-color: #88888863;
+  background-attachment: scroll;
   text-align: center;
  }
  

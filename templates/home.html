@@ -3,7 +3,8 @@
     
 {% for article in articles %}
     <a href='/project/ {{ article.article_id }}'>
-        <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
+        <div class="bulle">
+            <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
      
             <h1>
                 {{ article.title }}
