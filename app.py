@@ -48,8 +48,4 @@ def register():
 @app.route('/project/<article_id>')
 def project(article_id):
     article = Article.query.filter_by(article_id=article_id)
-    return render_template('project.html', article=[])
-
-@app.route('/search')
-def search():
-    return render_template('recherche.html')
+    return render_template('article.html', article=[])

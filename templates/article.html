@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="bulle">
-    <a href='/'>
-        <h1  class="title2">
-            titre test
-        </h1>
-        <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
-        <article class="desc">
-            desctests;kjg q,j gfwudg rsgkwskdsb ksh glssdfh skjkshfk skjkshfkqf
-
-            
-        </article>
+    <h1  class="title2">
+        titre test
+        {{ article.title }}
+    </h1>
+    <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
+    <article class="content">
+        desctests;kjg q,j gfwudg rsgkwskdsb ksh glssdfh skjkshfk skjkshfkqf
+        {{ article.description }}
         
-        <div class="bulle">
-            <h1>
-                {{ article.title }}
-            </h1>
-            <article  class="desc">
-                {{ article.description }}
-            </article>
-    </a>
+    </article>
+    <div>
+        {% if logged_in %}
+        <button class="like">Pour</button>
+        <button class="dislike">Contre</button>
+        {% else %}
+        <p class="no_connect">Connectez vous pour voter</p>
+        {% endif %}
     </div>
+</div>
+       
 {% endblock %}
