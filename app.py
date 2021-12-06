@@ -49,3 +49,7 @@ def register():
 def project(article_id):
     article = Article.query.filter_by(article_id=article_id)
     return render_template('project.html', article=[])
+
+@app.route('/search')
+def search():
+    return render_template('recherche.html')

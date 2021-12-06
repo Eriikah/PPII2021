@@ -60,10 +60,6 @@ li {
 .menu div {
   padding: 5px 14px;
  }
- /* DROPDOWN MENU */
-.services {
-  position: relative; 
- }
 
 .bas{
   position: absolute;
@@ -145,4 +141,18 @@ li {
 .desc{
   color: gray;
   font-family: sans-serif;
+}
+
+
+.search-form{
+
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 110%;
+  font-weight: bold;
+  size: 30%;
+}
+
+.search-form :hover{
+  text-decoration:none;
 }
