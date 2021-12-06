@@ -36,8 +36,8 @@ def login():
         if pwd_hash != db_hash:
             return abort(406)
         else:
-            return abort(418)
-    return render_template('login.html')
+             return render_template('home.html', logged_in=True)
+    return render_template('home.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
