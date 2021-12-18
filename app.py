@@ -1,7 +1,9 @@
 from flask import Flask
+from flask.helpers import flash
 from flask_sqlalchemy import SQLAlchemy
 from flask import render_template, request, abort, url_for, session
 from hashlib import sha256
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = '60a725867b515697115ccb2c561c2fee5694f2bc0d96372a4a033880702fa4a4'
@@ -57,7 +59,38 @@ def logout():
     session.pop('user_id')
     return render_template('home.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
 
-@app.route("/postpage")
+@app.route("/postpage", methods=['GET', 'POST'])
 def publier():
-    
+    if request.method=="POST":
+        title = request.form['title']
+        desc = request.form['description']
+        content = request.form['content']
+        tag1=request.form['tag1']
+        tag2=request.form['tag2']
+        tag3=request.form['tag3']
+        logged_in='user_id' in session.keys()
+        if not title:
+            flash('Title is required!')
+        elif not content:
+            flash('Il faut décrire votre projet')
+        elif not desc:
+            flash('Il faut décrire votre projet')
+        else:
+            post=Article(
+                poster_id=logged_in,
+                title=title,
+                vote_pos=0,
+                vote_neg=0,
+                content=content, 
+                description=desc, 
+                post_time=datetime.now(), 
+                deadline=datetime(2999, 12, 4), 
+                tag1=tag1,
+                tag2=tag2, 
+                tag3=tag3)
+            db.session.add(post)
+            db.session.commit()
+
+
     return render_template('postpage.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
+00

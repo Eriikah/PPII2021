@@ -220,3 +220,28 @@ li {
   font-size: 110%;
   font-weight: bold;
 }
+
+.tagbox{
+  width: 20%;
+  padding: 8px 2px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.descbox{
+  text-align: justify ;
+  width: 80%;
+  height: 80px;
+  padding: 8px 2px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.contentbox{
+  width: 80%;
+  height: 100px;
+  padding: 8px 2px;
+  box-sizing: border-box;
+  font-size: 16px;
+
+}
