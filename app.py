@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import render_template, request, abort, url_for, session
 from hashlib import sha256
 from datetime import datetime
+from sqlalchemy import or_
 
 app = Flask(__name__)
 app.secret_key = '60a725867b515697115ccb2c561c2fee5694f2bc0d96372a4a033880702fa4a4'
@@ -94,4 +95,16 @@ def publier():
 
 
     return render_template('postpage.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
-00
+
+@app.route("/projects", methods = ['GET','POST'])
+def listproject():
+    articles = Article.query.all()
+    if request.method == "POST":
+        tag=request.form.get('mytag')
+        results= Article.query.filter(or_(tag==Article.tag1,tag==Article.tag2,tag==Article.tag3))
+        print(results)
+        return render_template('allprojects.html',articles=results, logged_in='user_id' in session.keys(), status='status' in session.keys())
+
+
+    return render_template('allprojects.html',articles=articles, logged_in='user_id' in session.keys(), status='status' in session.keys())
+

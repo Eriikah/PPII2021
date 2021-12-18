@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="filterbox">
+    <form method="post"> Trier par:
+    <ul>
+    <label for="mytag">Tags</label>
+    <input list="tags" id="mytags" name="mytag" />    
+    <datalist id="tags">
+        {% for article in articles %}
+            <option>{{ article.tag1 }}</option>
+            <option>{{ article.tag2 }}</option>
+            <option>{{ article.tag3 }}</option>
+        {% endfor %}
+    </datalist></select></ul>
+    </form>
+</div>
+<div class="articles">
+{% for article in articles %}
+    <a href='/project/ {{ article.article_id }}'>
+        <div class="bulle">
+            <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
+     
+            <h1>
+                {{ article.title }}
+            </h1>
+            <article  class="desc">
+                {{ article.description }}
+            </article>
+    
+        </div>
+    </a>
+{% endfor %}
+</div>
+{% endblock %}
