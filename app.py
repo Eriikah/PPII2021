@@ -52,7 +52,8 @@ def register():
 @app.route('/project/<article_id>')
 def project(article_id):
     article = Article.query.filter_by(article_id=article_id).first()
-    return render_template('article.html', article=article, logged_in='user_id' in session.keys(), status='status' in session.keys())
+    poster= Article.query.join(User, Article.poster_id==User.user_id).add_columns(User.name,User.surname).filter(article_id==Article.article_id).first()
+    return render_template('article.html', article=article, poster=poster, logged_in='user_id' in session.keys(), status='status' in session.keys())
 
 @app.route('/logout')
 def logout():
@@ -68,7 +69,7 @@ def publier():
         tag1=request.form['tag1']
         tag2=request.form['tag2']
         tag3=request.form['tag3']
-        logged_in='user_id' in session.keys()
+        user_id=session.get('user_id')
         if not title:
             flash('Title is required!')
         elif not content:
@@ -77,7 +78,7 @@ def publier():
             flash('Il faut décrire votre projet')
         else:
             post=Article(
-                poster_id=logged_in,
+                poster_id=user_id,
                 title=title,
                 vote_pos=0,
                 vote_neg=0,

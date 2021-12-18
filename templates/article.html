@@ -4,6 +4,7 @@
     <h1  class="title2">
         {{ article.title }}
     </h1>
+    <p>écrit par {{ poster.name }} {{ poster.surname }}</p>
     <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
     <article class="content">
         {{ article.content }}
