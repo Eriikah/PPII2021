@@ -131,6 +131,7 @@ li {
 .bulle{
   background-color: rgb(233, 236, 255);
   margin: 10%;
+float: right;
   text-align: center;
   border-radius: 5px;
   padding: 5px;
@@ -245,3 +246,36 @@ li {
   font-size: 16px;
 
 }
+
+.filterbox{
+  display: inline-block;
+  position:fixed;
+  background-color: rgb(148, 156, 209);
+  margin: 10%;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0px 5px 5px grey;
+  transition: box-shadow 0.2s;
+}
+
+.wrapper{
+  width: auto;
+}
+
+.articles{
+
+  float: right;
+}
+
+.tag{
+  display: inline-block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-style: dashed;
+  border-color: rgb(37, 77, 77) ;
+  color: rgb(37, 77, 77) ;
+  margin: 0%;
+  text-align: center;
+  border-radius: 5px;
+}
+
