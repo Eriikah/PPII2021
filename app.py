@@ -17,7 +17,7 @@ db.create_all()
 @app.route('/')
 def home():
     articles = Article.query.all()
-    return render_template('home.html',articles=articles, logged_in='user_id' in session.keys())
+    return render_template('home.html',articles=articles, logged_in='user_id' in session.keys(), status='status' in session.keys())
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -39,20 +39,25 @@ def login():
         else:
             session['user_id'] = db_user.user_id
             return render_template('home.html', logged_in=True)
-    return render_template('login.html', logged_in='user_id' in session.keys())
+    return render_template('login.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html', logged_in='user_id' in session.keys())
+    return render_template('register.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
 
 
 @app.route('/project/<article_id>')
 def project(article_id):
     article = Article.query.filter_by(article_id=article_id).first()
-    return render_template('article.html', article=article, logged_in='user_id' in session.keys())
+    return render_template('article.html', article=article, logged_in='user_id' in session.keys(), status='status' in session.keys())
 
 @app.route('/logout')
 def logout():
     session.pop('user_id')
-    return render_template('home.html', logged_in='user_id' in session.keys())
+    return render_template('home.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
+
+@app.route("/postpage")
+def publier():
+    
+    return render_template('postpage.html', logged_in='user_id' in session.keys(), status='status' in session.keys())

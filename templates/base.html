@@ -12,6 +12,9 @@
     <div>
       <div class="menu">
         <div class="button0"><a href="/">Home</a></div>
+        {% if status == poster %}
+        <div class="button0"><a href="/postpage">Publier</a></div>
+        {% endif %}
         <div class="button0"><a href="/">Projets</a></div>
         <div class="search-form"><form  method="get" autocomplete="off">
           <input class="textbox1"  name="search" type="text" placeholder="Chercher projet" autofocus>
