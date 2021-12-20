@@ -130,6 +130,7 @@ li {
 
 .bulle{
   background-color: rgb(233, 236, 255);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 10%;
 float: right;
   text-align: center;
@@ -248,23 +249,33 @@ float: right;
 }
 
 .filterbox{
-  display: inline-block;
+  width: 20%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  float: left;
   position:fixed;
   background-color: rgb(148, 156, 209);
-  margin: 10%;
+  margin: 2%;
   text-align: center;
   border-radius: 5px;
   padding: 5px;
   box-shadow: 0px 5px 5px grey;
   transition: box-shadow 0.2s;
 }
+.filterbox ul{
+  width: 15%;
+  margin: 2%;
+}
+
+.tags{
+  width: 650%;
+}
 
 .wrapper{
-  width: auto;
+  margin: 0;
 }
 
 .articles{
-
+  width: 80%;
   float: right;
 }
 

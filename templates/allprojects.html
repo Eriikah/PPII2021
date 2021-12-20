@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-
+<div class="wrapper">
 <div class="filterbox">
     <form method="post"> Trier par:
     <ul>
     <label for="mytag">Tags</label>
-    <input list="tags" id="mytags" name="mytag" />    
+    <input class="tags" list="tags" id="mytags" name="mytag" />    
     <datalist id="tags">
         {% for article in articles %}
             {% if article.tag1 != "" %}
@@ -37,5 +37,6 @@
         </div>
     </a>
 {% endfor %}
+</div>
 </div>
 {% endblock %}
