@@ -8,9 +8,15 @@
     <input list="tags" id="mytags" name="mytag" />    
     <datalist id="tags">
         {% for article in articles %}
+            {% if article.tag1 != "" %}
             <option>{{ article.tag1 }}</option>
+            {% endif %}
+            {% if article.tag2 != "" %}
             <option>{{ article.tag2 }}</option>
+            {% endif %}
+            {% if article.tag3 != "" %}
             <option>{{ article.tag3 }}</option>
+            {% endif %}
         {% endfor %}
     </datalist></select></ul>
     </form>
