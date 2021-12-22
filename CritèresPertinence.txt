@@ -1,5 +1,4 @@
-Par ordre de priorité:
-
-Tags des articles où l'utilisateur a voté +
-Historique des mots clés recherchés
-Tags des articles visités
+Coef 3 : Pour les tags des articles où vote l'utilisateur
+Coef 2 : Pour les tags que recherche l'utilisateur
+Coef 2 : Pour les tags des articles qu'il visite suite à une recherche
+Coef 1 : Pour les tags des articles qu'il voit sur l'accueil
