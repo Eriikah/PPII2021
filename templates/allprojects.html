@@ -3,29 +3,27 @@
 <div class="wrapper">
 <div class="filterbox">
     <form method="post"> Trier par:
-    <ul>
-    <label for="mytag">Tags</label>
-    <input class="tags" list="tags" id="mytags" name="mytag" />    
-    <datalist id="tags">
-        {% for article in articles %}
-            {% if article.tag1 != "" %}
-            <option>{{ article.tag1 }}</option>
-            {% endif %}
-            {% if article.tag2 != "" %}
-            <option>{{ article.tag2 }}</option>
-            {% endif %}
-            {% if article.tag3 != "" %}
-            <option>{{ article.tag3 }}</option>
-            {% endif %}
-        {% endfor %}
-    </datalist></select></ul>
+        <ul>
+            <label for="mytag">Tags</label>
+            <select class="tags" name="mytag" id="tags">
+                <option value="">--Please choose a tag--</option>
+                {% for tag in tags %}
+                    <option>{{ tag.tag_name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="button3">Go</button>
+        </ul>
     </form>
 </div>
 <div class="articles">
 {% for article in articles %}
     <a href='/project/ {{ article.article_id }}'>
         <div class="bulle">
+            {% if article.img_link == None %}
             <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
+            {% else %}
+            <img class="imgdesc" src={{ article.img_link }} >
+            {% endif %}
      
             <h1>
                 {{ article.title }}

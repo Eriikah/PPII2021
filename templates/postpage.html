@@ -2,11 +2,14 @@
 {% block content %}
 <div class="title1"><p>Créez votre projet</p></div>
 <form class="container" method="post">
-    <div><input class="textbox" type="text" name="title" id="title_imput" placeholder='Titre'></div>
-    <div><input class="descbox" type="text" name="description" id="description_input" placeholder='Description rapide du projet'></div>
-    <div><input class="contentbox" type="text" name="content" id="content_input" placeholder="L'intégralité des details"></div>
+    <div>Titre:<textarea required class="textbox" type="text" name="title" id="title_imput" ></textarea></div>
+    <div>Description rapide du projet:<textarea required class="descbox" type="text" name="description" id="description_input" ></textarea></div>
+    <div>L'intégralité des details:<textarea required class="contentbox" type="text" name="content" id="content_input"></textarea></div>
+    <div>Donnez un lien vers une image pour illustrer votre projet:<textarea  class="descbox" type="text" name="imgurl" id="img_input"></textarea></div>
     <div>Tags:<div>
-        <input class="tagbox" type="text" name="tag1" id="tag1_input" placeholder="Tag1"><input class="tagbox" type="text" name="tag2" id="tag2_input" placeholder="Tag2"><input class="tagbox" type="text" name="tag3" id="tag3_input" placeholder="Tag3">
+        Tag1: <textarea required class="tagbox" type="text" name="tag1" id="tag1_input"></textarea> 
+        Tag2: <textarea  class="tagbox" type="text" name="tag2" id="tag2_input"></textarea>
+        Tag3: <textarea  class="tagbox" type="text" name="tag3" id="tag3_input"></textarea>
     </div></div>
     <div><button class="button1" type="submit">Publier</button></div>
     </form>

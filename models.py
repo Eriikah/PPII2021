@@ -13,6 +13,7 @@ class Article(db.Model):
     article_id = db.Column(db.Integer, primary_key=True)
     poster_id= db.Column(db.Integer)
     title = db.Column(db.String(64))
+    img_link=db.Column(db.String(1024))
     vote_pos = db.Column(db.Integer)
     vote_neg = db.Column(db.Integer)
     content = db.Column(db.String(128))
@@ -30,3 +31,8 @@ class Vote(db.Model):
     user_id = db.Column(db.Integer)
     user_vote = db.Column(db.Integer)
     vote_time = db.Column(db.DateTime)
+
+class Tags(db.Model):
+    tag_id =  db.Column(db.Integer, primary_key=True)
+    tag_name = db.Column(db.String(16))
+    

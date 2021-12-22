@@ -67,6 +67,7 @@ def publier():
         title = request.form['title']
         desc = request.form['description']
         content = request.form['content']
+        urlimg = request.form['imgurl']
         tag1=request.form['tag1']
         tag2=request.form['tag2']
         tag3=request.form['tag3']
@@ -81,6 +82,7 @@ def publier():
             post=Article(
                 poster_id=user_id,
                 title=title,
+                img_link=urlimg,
                 vote_pos=0,
                 vote_neg=0,
                 content=content, 
@@ -90,6 +92,18 @@ def publier():
                 tag1=tag1,
                 tag2=tag2, 
                 tag3=tag3)
+            exists1 = db.session.query(Tags.tag_id).filter_by(tag_name=tag1).first() is not None
+            exists2 = db.session.query(Tags.tag_id).filter_by(tag_name=tag2).first() is not None
+            exists3 = db.session.query(Tags.tag_id).filter_by(tag_name=tag3).first() is not None
+            if not exists1:
+                newtag1=Tags(tag_name=tag1)
+                db.session.add(newtag1) 
+            if not exists2:
+                newtag2=Tags(tag_name=tag2)
+                db.session.add(newtag2)
+            if not exists3:
+                newtag3=Tags(tag_name=tag3)
+                db.session.add(newtag3)
             db.session.add(post)
             db.session.commit()
 
@@ -99,12 +113,11 @@ def publier():
 @app.route("/projects", methods = ['GET','POST'])
 def listproject():
     articles = Article.query.all()
+    tags=Tags.query.all()
     if request.method == "POST":
-        tag=request.form.get('mytag')
-        results= Article.query.filter(or_(tag==Article.tag1,tag==Article.tag2,tag==Article.tag3))
+        tagsearched=request.form.get('mytag')
+        results= Article.query.filter(or_(tagsearched==Article.tag1,tagsearched==Article.tag2,tagsearched==Article.tag3))
         print(results)
-        return render_template('allprojects.html',articles=results, logged_in='user_id' in session.keys(), status='status' in session.keys())
-
-
-    return render_template('allprojects.html',articles=articles, logged_in='user_id' in session.keys(), status='status' in session.keys())
+        return render_template('allprojects.html',articles=results, tags=tags, logged_in='user_id' in session.keys(), status='status' in session.keys())
+    return render_template('allprojects.html',articles=articles, tags=tags,logged_in='user_id' in session.keys(), status='status' in session.keys())
 

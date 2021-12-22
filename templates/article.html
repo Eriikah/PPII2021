@@ -5,7 +5,11 @@
         {{ article.title }}
     </h1>
     <p>écrit par {{ poster.name }} {{ poster.surname }}</p>
+    {% if article.img_link == None %}
     <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
+    {% else %}
+    <img class="imgdesc" src={{ article.img_link }} >
+    {% endif %}
     <article class="content">
         {{ article.content }}
         
