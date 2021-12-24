@@ -290,3 +290,16 @@ li {
   border-radius: 5px;
 }
 
+/*Profile options*/
+
+.titleProfile{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #001c33;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.emailProfile{
+  color: gray;
+  font-family: sans-serif;
+}

@@ -121,3 +121,7 @@ def listproject():
         return render_template('allprojects.html',articles=results, tags=tags, logged_in='user_id' in session.keys(), status='status' in session.keys())
     return render_template('allprojects.html',articles=articles, tags=tags,logged_in='user_id' in session.keys(), status='status' in session.keys())
 
+@app.route("/profile", methods = ['GET'])
+def pageprofil():
+    return render_template('profile.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
+    
