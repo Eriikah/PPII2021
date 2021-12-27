@@ -158,5 +158,8 @@ def listproject():
 
 @app.route("/profile", methods = ['GET'])
 def pageprofil():
-    return render_template('profile.html')
-
+    if session.get('user_id') is None:
+        return render_template('profile.html',user=None)
+    user = User.query.filter(user_id=session.get('user_id'))
+    return render_template('profile.html',user=user)
+    

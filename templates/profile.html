@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% if 'user_id' in session.keys() %}
 <div class="title1"><p>Informations sur votre profil</p></div>
 <form class="container" method="get">
     <div>
@@ -14,6 +15,9 @@
     <p> Votre Role {{ user.role }}</p>
     </div>
     </form>
+{% else %}
+
+
 {% endblock %}
 
 Améliorations:
