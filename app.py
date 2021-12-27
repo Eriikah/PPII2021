@@ -48,6 +48,21 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        name = request.form['name']
+        surname = request.form['surname']
+        email = request.form['email']
+        password = request.form['password']
+        if email.form['re_password'] != password:
+            return abort(400)
+        else:
+            hash = sha256()
+            hash.update(password.encode('utf-8'))
+            hashed_pwd = hash.hexdigest()
+            db_user = User(password_hash=hashed_pwd, email=email, name=name, surname=surname, role='Citoyen', status='User')
+            db.session.add(db_user)
+            db.session.commit()
+            return redirect('/')
     return render_template('register.html')
 
 
