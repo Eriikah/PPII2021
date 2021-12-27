@@ -15,7 +15,7 @@
         
     </article>
     <div>
-        {% if logged_in %}
+        {% if 'user_id' in session.keys() %}
         <button class="like">Pour</button>
         <button class="dislike">Contre</button>
         {% else %}
