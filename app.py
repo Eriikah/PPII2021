@@ -162,4 +162,8 @@ def pageprofil():
         return render_template('profile.html',user=None)
     user = User.query.filter(user_id=session.get('user_id'))
     return render_template('profile.html',user=user)
+<<<<<<< HEAD
     
+=======
+    
+>>>>>>> c7c2802f1ac24dcc8ad3eda653ffef5a04bc2e74
