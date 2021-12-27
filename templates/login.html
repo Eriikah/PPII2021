@@ -5,6 +5,13 @@
     <form method="post">
         <div><p>Email:</p><input class="textbox" type="email" name="email" id="email_input" placeholder='Email'></div>
         <div><p>Password:</p><input class="textbox" type="password" name="password" id="pwd_input" placeholder='Password'></div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
         <div><button class="button1" type="submit">Login</button></div>
     </form>
 </div>

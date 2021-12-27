@@ -2,14 +2,21 @@
 {% block content %}
 <div class="title1"><p>Créez votre projet</p></div>
 <form class="container" method="POST" enctype="multipart/form-data">
-    <div>Titre:<textarea required class="textbox" type="text" name="title" id="title_imput" ></textarea></div>
-    <div>Description rapide du projet:<textarea required class="descbox" type="text" name="description" id="description_input" ></textarea></div>
-    <div>L'intégralité des details:<textarea required class="contentbox" type="text" name="content" id="content_input"></textarea></div>
-    <div>Illustrez votre projet:<input type="file" name="file" accept="image/png, image/jpeg"></div>
+    <div><p>Titre:</p><textarea required class="textbox" type="text" name="title" id="title_imput" ></textarea></div>
+    <div><p>Description rapide du projet: </p><textarea required class="descbox" type="text" name="description" id="description_input" ></textarea></div>
+    <div><p>L'intégralité des details:</p> <textarea required class="contentbox" type="text" name="content" id="content_input"></textarea></div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+    {% endwith %}    
+    <div><p>Illustrez votre projet:</p><input type="file" name="file" accept="image/png, image/jpeg"></div>
     <div>Tags:<div>
-        Tag1: <textarea required class="tagbox" type="text" name="tag1" id="tag1_input"></textarea> 
-        Tag2: <textarea  class="tagbox" type="text" name="tag2" id="tag2_input"></textarea>
-        Tag3: <textarea  class="tagbox" type="text" name="tag3" id="tag3_input"></textarea>
+       <div class="row"> <p>Tag1:</p> <textarea required class="tagbox" type="text" name="tag1" id="tag1_input"></textarea> </div>
+       <div class="row"> <p>Tag2:</p> <textarea  class="tagbox" type="text" name="tag2" id="tag2_input"></textarea></div>
+       <div class="row"> <p>Tag3:</p> <textarea  class="tagbox" type="text" name="tag3" id="tag3_input"></textarea></div>
     </div></div>
     <button class="button1" type="submit">Publier</button>
     </form>

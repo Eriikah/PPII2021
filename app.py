@@ -31,17 +31,19 @@ def login():
         form = request.form
         email = form.get('email')
         pwd = form.get('password')
-        if not email or not pwd:
-            return abort(406) # temporary
+        if not email or not pwd or not email and pwd:
+            flash("Field requiered")
+            return redirect("/login")
         h.update(pwd.encode('utf-8'))
         pwd_hash = h.hexdigest()
         db_user = User.query.filter_by(email=email).first()
         if db_user is None:
-            return redirect('/register')
-            return render_template('register.html', logged_in='user_id' in session.keys())
+            flash("Email non reconnu, êtes vous sûr de l'orthographe?")
+            return redirect("/login")
         db_hash = db_user.password_hash
         if pwd_hash != db_hash:
-            return abort(406)
+            flash("Mot de passe non reconnu, êtes vous sûr de l'orthographe?")
+            return redirect("/login")
         else:
             session['user_id'] = db_user.user_id
             session['statut'] = db_user.statut
@@ -96,13 +98,7 @@ def publier():
         user_id=session.get('user_id')
         if request.files:
             file = request.files['file']
-        if not title:
-            flash('Title is required!')
-        elif not content:
-            flash('Il faut décrire votre projet')
-        elif not desc:
-            flash('Il faut décrire votre projet')
-        elif not file:
+        if not file:
             flash('Il faut illustrez votre projet')
         else:
             uid=""
