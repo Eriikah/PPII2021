@@ -12,7 +12,7 @@
     <div>
       <div class="menu">
         <div class="button0"><a href="/">Home</a></div>
-        {% if status == poster %}
+        {% if session.get('statut') == 'Poster' %}
         <div class="button0"><a href="/postpage">Publier</a></div>
         {% endif %}
         <div class="button0"><a href="/projects">Projets</a></div>
@@ -21,7 +21,7 @@
           <button type="submit" formaction="/search"><span class="button3">search</span></button>
       </form>
       </div>
-      {% if logged_in %}
+      {% if 'user_id' in session.keys() %}
       <div class="connect"><a href="/logout">Déconnexion</a></div>
       {% else %}
       <div class="connect"><a href="/login">Connexion</a></div>

@@ -1,7 +1,7 @@
 from flask import Flask
 from flask.helpers import flash
 from flask_sqlalchemy import SQLAlchemy
-from flask import render_template, request, abort, url_for, session
+from flask import render_template, request, abort, url_for, session, redirect
 from hashlib import sha256
 from datetime import datetime
 from sqlalchemy import or_
@@ -20,7 +20,7 @@ db.create_all()
 @app.route('/')
 def home():
     articles = Article.query.all()
-    return render_template('home.html',articles=articles, logged_in='user_id' in session.keys(), status='status' in session.keys())
+    return render_template('home.html',articles=articles)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -41,25 +41,27 @@ def login():
             return abort(406)
         else:
             session['user_id'] = db_user.user_id
-            return render_template('home.html', logged_in=True)
-    return render_template('login.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
+            session['statut'] = db_user.statut
+            return redirect('/')
+    return render_template('login.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
+    return render_template('register.html')
 
 
 @app.route('/project/<article_id>')
 def project(article_id):
     article = Article.query.filter_by(article_id=article_id).first()
     poster= Article.query.join(User, Article.poster_id==User.user_id).add_columns(User.name,User.surname).filter(article_id==Article.article_id).first()
-    return render_template('article.html', article=article, poster=poster, logged_in='user_id' in session.keys(), status='status' in session.keys())
+    return render_template('article.html', article=article, poster=poster)
 
 @app.route('/logout')
 def logout():
-    session.pop('user_id')
-    return render_template('home.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
+    session.pop('user_id', None)
+    session.pop('statut', None)
+    return redirect('/')
 
 @app.route("/postpage", methods=['GET', 'POST'])
 def publier():
@@ -108,7 +110,7 @@ def publier():
             db.session.commit()
 
 
-    return render_template('postpage.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
+    return render_template('postpage.html')
 
 @app.route("/projects", methods = ['GET','POST'])
 def listproject():
@@ -117,11 +119,10 @@ def listproject():
     if request.method == "POST":
         tagsearched=request.form.get('mytag')
         results= Article.query.filter(or_(tagsearched==Article.tag1,tagsearched==Article.tag2,tagsearched==Article.tag3))
-        print(results)
-        return render_template('allprojects.html',articles=results, tags=tags, logged_in='user_id' in session.keys(), status='status' in session.keys())
-    return render_template('allprojects.html',articles=articles, tags=tags,logged_in='user_id' in session.keys(), status='status' in session.keys())
+        return render_template('allprojects.html',articles=results, tags=tags)
+    return render_template('allprojects.html',articles=articles, tags=tags,logged_in='user_id' in session.keys(), status=session.get('statut'))
 
 @app.route("/profile", methods = ['GET'])
 def pageprofil():
-    return render_template('profile.html', logged_in='user_id' in session.keys(), status='status' in session.keys())
+    return render_template('profile.html')
     
