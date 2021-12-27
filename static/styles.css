@@ -15,6 +15,10 @@ li {
   list-style: none;
  }
 
+ .main-div {
+   margin: 2%;
+ }
+
  /* NAVBAR STYLING STARTS */
 .navbar {
   display: flex;
@@ -44,7 +48,7 @@ li {
   transition: 0.3s ease;
  }
 
-.connect a {
+ .connect a {
   color:rgb(0, 255, 255);
  }
 .menu {
@@ -302,4 +306,10 @@ li {
 .emailProfile{
   color: gray;
   font-family: sans-serif;
+}
+
+.sous{
+  font-style: italic;
+  size: 2px;
+  margin: 2%;
 }
