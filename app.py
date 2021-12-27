@@ -35,6 +35,7 @@ def login():
         pwd_hash = h.hexdigest()
         db_user = User.query.filter_by(email=email).first()
         if db_user is None:
+            return redirect('/register')
             return render_template('register.html', logged_in='user_id' in session.keys())
         db_hash = db_user.password_hash
         if pwd_hash != db_hash:
@@ -53,13 +54,13 @@ def register():
         surname = request.form['surname']
         email = request.form['email']
         password = request.form['password']
-        if email.form['re_password'] != password:
+        if request.form['re_password'] != password:
             return abort(400)
         else:
             hash = sha256()
             hash.update(password.encode('utf-8'))
             hashed_pwd = hash.hexdigest()
-            db_user = User(password_hash=hashed_pwd, email=email, name=name, surname=surname, role='Citoyen', status='User')
+            db_user = User(password_hash=hashed_pwd, email=email, name=name, surname=surname, role='Citoyen', statut='User')
             db.session.add(db_user)
             db.session.commit()
             user_id = db_user.user_id
