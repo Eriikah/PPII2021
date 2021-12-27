@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask.helpers import flash
 from flask_sqlalchemy import SQLAlchemy
@@ -5,6 +6,7 @@ from flask import render_template, request, abort, url_for, session, redirect
 from hashlib import sha256
 from datetime import datetime
 from sqlalchemy import or_
+
 
 app = Flask(__name__)
 app.secret_key = '60a725867b515697115ccb2c561c2fee5694f2bc0d96372a4a033880702fa4a4'
@@ -88,22 +90,34 @@ def publier():
         title = request.form['title']
         desc = request.form['description']
         content = request.form['content']
-        urlimg = request.form['imgurl']
         tag1=request.form['tag1']
         tag2=request.form['tag2']
         tag3=request.form['tag3']
         user_id=session.get('user_id')
+        if request.files:
+            file = request.files['file']
         if not title:
             flash('Title is required!')
         elif not content:
             flash('Il faut décrire votre projet')
         elif not desc:
             flash('Il faut décrire votre projet')
+        elif not file:
+            flash('Il faut illustrez votre projet')
         else:
+            uid=""
+            if request.files:
+                filename, ext = file.filename.rsplit('.', 1)
+                ext = ext.lower()
+                hash = sha256()
+                hash.update(file.read(-1))
+                uid = hash.hexdigest()
+                file.stream.seek(0)
+                file.save(f'static/'+ uid +'.'+ext)  
             post=Article(
                 poster_id=user_id,
                 title=title,
-                img_link=urlimg,
+                img_link=uid +'.'+ext,
                 vote_pos=0,
                 vote_neg=0,
                 content=content, 
@@ -127,9 +141,10 @@ def publier():
                 db.session.add(newtag3)
             db.session.add(post)
             db.session.commit()
-
+            return redirect("/projects")
 
     return render_template('postpage.html')
+
 
 @app.route("/projects", methods = ['GET','POST'])
 def listproject():
@@ -144,4 +159,4 @@ def listproject():
 @app.route("/profile", methods = ['GET'])
 def pageprofil():
     return render_template('profile.html')
-    
+

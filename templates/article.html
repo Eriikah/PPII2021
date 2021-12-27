@@ -8,7 +8,7 @@
     {% if not article.img_link %}
     <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
     {% else %}
-    <img class="imgdesc" src={{ article.img_link }} >
+    <img class="imgdesc" src="{{  url_for('static', filename=article.img_link) }} ">
     {% endif %}
     <article class="content">
         {{ article.content }}
