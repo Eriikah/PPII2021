@@ -4,7 +4,11 @@
 {% for article in articles %}
     <a href='/project/ {{ article.article_id }}'>
         <div class="bulle">
+            {% if not article.img_link %}
             <img class="imgdesc" src="{{ url_for('static', filename='padoru.png') }}" >
+            {% else %}
+            <img class="imgdesc" src={{ article.img_link }} >
+            {% endif %}
      
             <h1>
                 {{ article.title }}
