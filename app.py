@@ -139,5 +139,6 @@ def listproject():
 
 @app.route("/profile", methods = ['GET'])
 def pageprofil():
-    return render_template('profile.html')
+    user = User.query.all()
+    return render_template('profile.html',user=user)
     
