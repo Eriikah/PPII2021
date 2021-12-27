@@ -62,6 +62,9 @@ def register():
             db_user = User(password_hash=hashed_pwd, email=email, name=name, surname=surname, role='Citoyen', status='User')
             db.session.add(db_user)
             db.session.commit()
+            user_id = db_user.user_id
+            session['user_id'] = user_id
+            session['statut'] = 'User'
             return redirect('/')
     return render_template('register.html')
 
