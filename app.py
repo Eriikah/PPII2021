@@ -6,6 +6,7 @@ from flask import render_template, request, abort, url_for, session, redirect
 from hashlib import sha256
 from datetime import datetime
 from sqlalchemy import or_
+import pickle
 
 
 app = Flask(__name__)
@@ -157,4 +158,24 @@ def pageprofil():
     if session.get('user_id') is None:
         return render_template('profile.html',user=None)
     user = User.query.filter(user_id=session.get('user_id'))
-    return render_template('profile.html',user=user)   
+    return render_template('profile.html',user=user)
+
+
+@app.route('/search')
+def search():
+    search_terms = request.args.get('search')
+    curr_user_id = session.get('user_id')
+    if curr_user_id is not None:
+        user_cookies = None
+        with open('pertinence_cookies', 'rb') as pc:
+            pertinence_cookies = pickle.load(pc)
+            user_cookies = pertinence_cookies.get(curr_user_id) or {} # sets the cookies to an empty dict if they are None
+        for term in search_terms.split():
+            if term not in user_cookies.keys():
+                user_cookies[term] = 1
+            else:
+                user_cookies[term] += 1
+        pertinence_cookies[curr_user_id] = user_cookies
+        with open('pertinence_cookies', 'wb') as pc:
+            pickle.dump(pertinence_cookies, pc)
+    return search_terms
