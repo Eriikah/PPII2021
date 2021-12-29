@@ -162,9 +162,8 @@ def pageprofil():
     return render_template('profile.html',user=user)
 
 
-@app.route('/search')
+@app.route('/search', methods=['GET', 'POST'])
 def search():
-    tags=Tags.query.all()             
     search_terms = request.args.get('search')
     curr_user_id = session.get('user_id')
     if curr_user_id is not None:
@@ -184,9 +183,17 @@ def search():
     filter=[(or_(Article.tag1.contains(term),Article.tag2.contains(term),Article.tag3.contains(term),Article.title.contains(term),Article.content.contains(term),Article.description.contains(term))) for term in terms]
     query=Article.query.filter(or_(*filter))
     results=query.all()
-    print(results)
     if query.count()==0:
        flash('No results found')
-       redirect('/projects')
+       return redirect('/noresult')
+    tags=Tags.query.all()                
+    if request.method == "POST":
+        tagsearched=request.form.get('mytag')
+        results= Article.query.filter(or_(tagsearched==Article.tag1,tagsearched==Article.tag2,tagsearched==Article.tag3))
+        return render_template('allprojects.html',articles=results, tags=tags)
     return render_template('allprojects.html',articles=results, tags=tags)
     return search_terms
+
+@app.route('/noresult')
+def noresult():
+    return render_template('noresult.html',logged_in='user_id' in session.keys(), status=session.get('statut'))
