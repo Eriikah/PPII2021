@@ -1,4 +1,3 @@
-import os
 from flask import Flask
 from flask.helpers import flash
 from flask_sqlalchemy import SQLAlchemy
@@ -7,6 +6,8 @@ from hashlib import sha256
 from datetime import datetime
 from sqlalchemy import or_
 import pickle
+
+from sqlalchemy.orm import query
 
 
 app = Flask(__name__)
@@ -165,6 +166,7 @@ def pageprofil():
 def search():
     search_terms = request.args.get('search')
     curr_user_id = session.get('user_id')
+    tags=Tags.query.all()    
     if curr_user_id is not None:
         user_cookies = None
         with open('pertinence_cookies', 'rb') as pc:
@@ -178,4 +180,14 @@ def search():
         pertinence_cookies[curr_user_id] = user_cookies
         with open('pertinence_cookies', 'wb') as pc:
             pickle.dump(pertinence_cookies, pc)
+    terms=search_terms.split()
+    
+    filter=[(or_(Article.tag1.contains(term),Article.tag2.contains(term),Article.tag3.contains(term),Article.title.contains(term),Article.content.contains(term),Article.description.contains(term))) for term in terms]
+    query=Article.query.filter(or_(*filter))
+    results=query.all()
+    print(results)
+    if query.count()==0:
+       flash('No results found')
+       redirect('/projects')
+    return render_template('allprojects.html',articles=results, tags=tags)
     return search_terms

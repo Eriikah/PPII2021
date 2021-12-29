@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+{% endwith %}
 <div class="wrapper">
+    
 <div class="filterbox">
+    
     <form method="post"> Trier par:
         <ul>
             <label for="mytag">Tags</label>
@@ -16,6 +25,8 @@
     </form>
 </div>
 <div class="articles">
+    
+
 {% for article in articles %}
     <a href='/project/ {{ article.article_id }}'>
         <div class="bulle">
@@ -24,7 +35,6 @@
             {% else %}
             <img class="imgdesc" src="{{  url_for('static', filename=article.img_link) }} " >
             {% endif %}
-     
             <h1>
                 {{ article.title }}
             </h1>
