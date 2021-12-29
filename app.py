@@ -158,15 +158,15 @@ def listproject():
 def pageprofil():
     if session.get('user_id') is None:
         return render_template('profile.html',user=None)
-    user = User.query.filter(user_id=session.get('user_id'))
+    user = User.query.filter(User.user_id==session.get('user_id'))
     return render_template('profile.html',user=user)
 
 
 @app.route('/search')
 def search():
+    tags=Tags.query.all()             
     search_terms = request.args.get('search')
     curr_user_id = session.get('user_id')
-    tags=Tags.query.all()    
     if curr_user_id is not None:
         user_cookies = None
         with open('pertinence_cookies', 'rb') as pc:
@@ -180,8 +180,7 @@ def search():
         pertinence_cookies[curr_user_id] = user_cookies
         with open('pertinence_cookies', 'wb') as pc:
             pickle.dump(pertinence_cookies, pc)
-    terms=search_terms.split()
-    
+    terms=search_terms.split() 
     filter=[(or_(Article.tag1.contains(term),Article.tag2.contains(term),Article.tag3.contains(term),Article.title.contains(term),Article.content.contains(term),Article.description.contains(term))) for term in terms]
     query=Article.query.filter(or_(*filter))
     results=query.all()
