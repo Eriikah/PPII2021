@@ -152,15 +152,16 @@ def listproject():
         tagsearched=request.form.get('mytag')
         results= Article.query.filter(or_(tagsearched==Article.tag1,tagsearched==Article.tag2,tagsearched==Article.tag3))
         return render_template('allprojects.html',articles=results, tags=tags)
-    return render_template('allprojects.html',articles=articles, tags=tags,logged_in='user_id' in session.keys(), status=session.get('statut'))
+    return render_template('allprojects.html',articles=articles, tags=tags, logged_in='user_id' in session.keys(), status=session.get('statut'))
 
 @app.route("/profile", methods = ['GET'])
 def pageprofil():
     if session.get('user_id') is None:
         return render_template('profile.html',user=None)
     user = User.query.filter(User.user_id==session.get('user_id'))
-    return render_template('profile.html',user=user)
-
+    print(session.get('user_id'))
+    print(user)
+    return render_template('profile.html' , user=user)
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():

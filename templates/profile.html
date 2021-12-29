@@ -3,19 +3,29 @@
 {% if 'user_id' in session.keys() %}
 <div class="title1"><p>Informations sur votre profil</p></div>
 <form class="container" method="get">
-    <div>
-        <h1 class="titleProfile">
-            <p>Votre Nom {{ user.name }}</p>
-            <p>Votre Prénom {{ user.surname }}</p>
-        </h1>
-        <h2 class="emailProfile">
-            <p> Vous êtes enregistré avec l'email {{ user.email }}</p>
-        </h2>
-    <p> Votre Statut {{ user.statut }}</p>
-    <p> Votre Role {{ user.role }}</p>
-    </div>
-    </form>
+<table>
+<tr>
+<h1 class="titleProfile">
+<p>Votre Nom {{ user.name }}</p>
+<p>Votre Prénom {{ user.surname }}</p>
+</h1>
+</tr>
+<tr>
+<h2 class="emailProfile">
+<p> Vous êtes enregistré avec l'email {{ user.email }}</p>
+</h2>
+</tr>
+<tr>
+<p> Votre Statut {{ user.statut }}</p>
+<p> Votre Role {{ user.role }}</p>
+</tr>
+</table>
+</form>
+
 {% else %}
+
+<div class="title1"><p>Vous n'êtes pas connecté, merci de vous connecter si vous souhaitez accéder à votre profil.</p></div>
+<a href="/">Retour à l'accueil</a>
 
 {% endif %}
 
