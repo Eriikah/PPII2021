@@ -158,9 +158,7 @@ def listproject():
 def pageprofil():
     if session.get('user_id') is None:
         return render_template('profile.html',user=None)
-    user = User.query.filter(User.user_id==session.get('user_id'))
-    print(session.get('user_id'))
-    print(user)
+    user = User.query.filter(User.user_id==session.get('user_id')).first()
     return render_template('profile.html' , user=user)
 
 @app.route('/search', methods=['GET', 'POST'])
