@@ -8,6 +8,8 @@ from sqlalchemy import or_
 import pickle
 
 from sqlalchemy.orm import query
+from sqlalchemy.sql.functions import current_timestamp
+from sqlalchemy.sql.expression import func
 
 
 app = Flask(__name__)
@@ -20,6 +22,82 @@ from models import *
 
 db.create_all()
 
+def like_post(self,article):
+    # prend le plus grand id existant pour créé un nouvel id non utilisé
+    idmax = db.session.query(func.max(Vote.vote_id)).scalar()
+    print(idmax)
+    if idmax == None:
+        id = 1
+    print(id)
+
+    # si pas déja voté on ajoute un vote direct
+    if not has_voted(self,article):
+        new_vote = Vote(vote_id=id, vote_on=article.title(), parent_id=article.article_id, user_id =self.user_id, user_vote=1, vote_time=datetime(current_timestamp()))
+        article.vote_pos += 1
+        db.session.add(new_vote)
+        db.session.commit()
+
+    # si déja voté on récupère la valeur de vote total sur l'article et le contenue du vote
+    else:
+        val = article.vote_pos()
+        val_vote = Vote.query.filter_by(article.article_id == Vote.parent_id).first()
+        val_vote = val_vote.user_vote()
+
+        # si le vote était négatif on modifie la bd et on change la date du vote
+        if val_vote == -1:
+            Vote.user_vote = 1
+            Vote.vote_time = datetime(current_timestamp)
+            article.vote_pos += 1
+            article.vote_neg -= 1
+            db.session.commit()
+
+        # si le vote était positif on supprime le vote
+        else:
+            Vote.query.filter_by(user_id=self.user_id, parent_id=article.article_id).delete()
+            if val > 0:
+                Article.vote_pos -= 1
+            db.session.commit()
+
+
+'''
+def dislike_post(self,article):
+    # prend le plus grand id existant pour créé un nouvel id non utilisé
+    idmax = Vote.query(func.max(Vote.vote_id)).first()
+    id = idmax + 1
+
+    # si pas déja voté on ajoute un vote direct
+    if not self.has_voted():
+        new_vote = Vote(vote_id=id, vote_on=article.title(), parent_id=article.article_id, user_id =self.user_id, user_vote=-1, vote_time=datetime(current_timestamp()))
+        article.vote_neg += 1
+        db.session.add(new_vote)
+        db.session.commit()
+
+    # si déja voté on récupère la valeur de vote total sur l'article et le contenue du vote
+    else:
+        val = article.vote_neg()
+        val_vote = Vote.query.filter_by(article.article_id == Vote.parent_id).first()
+        val_vote = val_vote.user_vote()
+
+        # si le vote était positif on modifie la bd et on change la date du vote
+        if val_vote == 1:
+            Vote.user_vote = -1
+            Vote.vote_time = datetime(current_timestamp)
+            article.vote_neg += 1
+            article.vote_pos -= 1
+            db.session.commit()
+
+        # si le vote était négatif on supprime le vote
+        else:
+            Vote.query.filter_by(user_id=self.user_id, parent_id=article.article_id).delete()
+            if val < 0:
+                article.vote_pos -= 1
+            db.session.commit()
+'''
+
+
+def has_voted(self,article):
+    # répond True si il existe un vote avec l'id de l'utilisateur connecté et l'id de l'article
+    return Vote.query.filter_by(user_id=self.user_id, parent_id=article.article_id).count() > 0
 
 @app.route('/')
 def home():
@@ -80,7 +158,16 @@ def register():
 def project(article_id):
     article = Article.query.filter_by(article_id=article_id).first()
     poster= Article.query.join(User, Article.poster_id==User.user_id).add_columns(User.name,User.surname).filter(article_id==Article.article_id).first()
-    return render_template('article.html', article=article, poster=poster)
+    vote = Vote.query.filter(article.article_id == Vote.parent_id).first()
+    return render_template('article.html', article=article, poster=poster, vote=vote)
+
+
+@app.route('/project/like/<article_id>')
+def like_article(article_id):
+    article = Article.query.filter_by(article_id=article_id).first()
+    user = User.query.filter(User.user_id==session.get('user_id')).first()
+    like_post(user,article)
+    return redirect('/project/' + article_id)
 
 @app.route('/logout')
 def logout():
