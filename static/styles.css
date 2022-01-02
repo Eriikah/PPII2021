@@ -205,6 +205,18 @@ li {
   color: #fff;
 }
 
+.like_gray{ 
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 100%;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1%;
+}
+
 .dislike{
   background-color: #d40000; 
   border: none;
@@ -219,6 +231,19 @@ li {
   padding: 1%;
   color: #fff;
 }
+
+.dislike_gray{
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 100%;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1%;
+}
+
 
 .no_connect{
   text-align: center;
