@@ -162,10 +162,6 @@ def project(article_id):
     article = Article.query.filter_by(article_id=article_id).first()
     poster= Article.query.join(User, Article.poster_id==User.user_id).add_columns(User.name,User.surname).filter(article_id==Article.article_id).first()
     vote = Vote.query.filter(article.article_id == Vote.parent_id).first()
-    if vote == None:
-        print('None')
-    else:
-        print(vote.user_vote)
     return render_template('article.html', article=article, poster=poster, vote=vote)
 
 
