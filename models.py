@@ -26,7 +26,7 @@ class Article(db.Model):
 
 class Vote(db.Model):
     vote_id = db.Column(db.Integer, primary_key=True)
-    vote_on = db.Column(db.String(32))
+    vote_on = db.Column(db.String(64))
     parent_id= db.Column(db.Integer)
     user_id = db.Column(db.Integer)
     user_vote = db.Column(db.Integer)
