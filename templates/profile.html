@@ -6,18 +6,18 @@
 <table>
 <tr>
 <h1 class="titleProfile">
-<p>Votre Nom {{ user.name }}</p>
-<p>Votre Prénom {{ user.surname }}</p>
+<p class="nom">Votre Nom: {{ user.surname }}</p>
+<p class="prenom">Votre Prénom: {{ user.name }}</p>
 </h1>
 </tr>
 <tr>
 <h2 class="emailProfile">
-<p> Vous êtes enregistré avec l'email {{ user.email }}</p>
+<p> Vous êtes enregistré avec l'email: <p class="ita">{{ user.email }}</p></p>
 </h2>
 </tr>
 <tr>
-<p> Votre Statut {{ user.statut }}</p>
-<p> Votre Role {{ user.role }}</p>
+<p class="statut"> Votre Statut: {{ user.statut }}</p>
+<p class="role"> Votre Role: {{ user.role }}</p>
 </tr>
 </table>
 </form>

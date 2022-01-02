@@ -328,3 +328,23 @@ text-align: center;
 font-family: 'Courier New', Courier, monospace;
 font-style: italic;
 }
+
+.nom{
+color: red;
+}
+
+.prenom{
+color: orangered;
+}
+
+.statut{
+color:rgb(14, 12, 134)
+}
+
+.role{
+color:rgb(5, 4, 61)
+}
+
+.ita{
+font-style: italic;
+}
