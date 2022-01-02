@@ -16,8 +16,16 @@
     </article>
     <div>
         {% if 'user_id' in session.keys() %}
-        <button class="like">Pour</button>
-        <button class="dislike">Contre</button>
+            {% if vote.user_vote == 1 %}
+                <button class="like">Pour</button>
+                <button class="dislike_gray">Contre</button>
+            {% elif vote.user_vote == -1 %}
+                <button class="like_gray">Pour</button>
+                <button class="dislike">Contre</button>
+            {% else %}
+                    <a class="like" href = '/project/like/{{ article.article_id }}'>Pour</a>
+                    <button class="dislike">Contre</button>
+            {% endif %}
         {% else %}
         <a href="/login"><p class="no_connect">Connectez vous pour voter</p></a>
         {% endif %}
