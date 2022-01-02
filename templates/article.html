@@ -23,8 +23,8 @@
                 <button class="like_gray">Pour</button>
                 <button class="dislike">Contre</button>
             {% else %}
-                    <a class="like" href = '/project/like/{{ article.article_id }}'>Pour</a>
-                    <button class="dislike">Contre</button>
+                <a class="like" href = '/project/like/{{ article.article_id }}'>Pour</a>
+                <button class="dislike">Contre</button>
             {% endif %}
         {% else %}
         <a href="/login"><p class="no_connect">Connectez vous pour voter</p></a>
