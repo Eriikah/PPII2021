@@ -17,14 +17,14 @@
     <div>
         {% if 'user_id' in session.keys() %}
             {% if vote.user_vote == 1 %}
-                <button class="like">Pour</button>
-                <button class="dislike_gray">Contre</button>
+                <a class="like" href = '/project/like/{{ article.article_id }}'>Pour</a>
+                <a class="dislike_gray" href='/project/dislike/{{ article.article_id }}'>Contre</a>
             {% elif vote.user_vote == -1 %}
-                <button class="like_gray">Pour</button>
-                <button class="dislike">Contre</button>
+                <a class="like_gray" href = '/project/like/{{ article.article_id }}'>Pour</a>
+                <a class="dislike" href='/project/dislike/{{ article.article_id }}'>Contre</a>
             {% else %}
                 <a class="like" href = '/project/like/{{ article.article_id }}'>Pour</a>
-                <button class="dislike">Contre</button>
+                <a class="dislike" href='/project/dislike/{{ article.article_id }}'>Contre</a>
             {% endif %}
         {% else %}
         <a href="/login"><p class="no_connect">Connectez vous pour voter</p></a>

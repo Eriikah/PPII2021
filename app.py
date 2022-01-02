@@ -25,28 +25,28 @@ db.create_all()
 def like_post(self,article):
     # prend le plus grand id existant pour créé un nouvel id non utilisé
     idmax = db.session.query(func.max(Vote.vote_id)).scalar()
-    print(idmax)
     if idmax == None:
         id = 1
-    print(id)
+    else:
+        id = idmax + 1
 
     # si pas déja voté on ajoute un vote direct
     if not has_voted(self,article):
-        new_vote = Vote(vote_id=id, vote_on=article.title(), parent_id=article.article_id, user_id =self.user_id, user_vote=1, vote_time=datetime(current_timestamp()))
+        new_vote = Vote(vote_id=id, vote_on=article.title, parent_id=article.article_id, user_id =self.user_id, user_vote=1, vote_time=current_timestamp())
         article.vote_pos += 1
         db.session.add(new_vote)
         db.session.commit()
 
     # si déja voté on récupère la valeur de vote total sur l'article et le contenue du vote
     else:
-        val = article.vote_pos()
-        val_vote = Vote.query.filter_by(article.article_id == Vote.parent_id).first()
-        val_vote = val_vote.user_vote()
+        val = article.vote_pos
+        vote = Vote.query.filter(article.article_id == Vote.parent_id).first()
+        val_vote = vote.user_vote
 
         # si le vote était négatif on modifie la bd et on change la date du vote
         if val_vote == -1:
-            Vote.user_vote = 1
-            Vote.vote_time = datetime(current_timestamp)
+            vote.user_vote = 1
+            vote.vote_time = current_timestamp()
             article.vote_pos += 1
             article.vote_neg -= 1
             db.session.commit()
@@ -59,29 +59,32 @@ def like_post(self,article):
             db.session.commit()
 
 
-'''
+
 def dislike_post(self,article):
     # prend le plus grand id existant pour créé un nouvel id non utilisé
-    idmax = Vote.query(func.max(Vote.vote_id)).first()
-    id = idmax + 1
+    idmax = db.session.query(func.max(Vote.vote_id)).scalar()
+    if idmax == None:
+        id = 1
+    else:
+        id = idmax + 1
 
     # si pas déja voté on ajoute un vote direct
-    if not self.has_voted():
-        new_vote = Vote(vote_id=id, vote_on=article.title(), parent_id=article.article_id, user_id =self.user_id, user_vote=-1, vote_time=datetime(current_timestamp()))
+    if not has_voted(self,article):
+        new_vote = Vote(vote_id=id, vote_on=article.title, parent_id=article.article_id, user_id =self.user_id, user_vote=-1, vote_time=current_timestamp())
         article.vote_neg += 1
         db.session.add(new_vote)
         db.session.commit()
 
     # si déja voté on récupère la valeur de vote total sur l'article et le contenue du vote
     else:
-        val = article.vote_neg()
-        val_vote = Vote.query.filter_by(article.article_id == Vote.parent_id).first()
-        val_vote = val_vote.user_vote()
+        val = article.vote_neg
+        vote = Vote.query.filter(article.article_id == Vote.parent_id).first()
+        val_vote = vote.user_vote
 
         # si le vote était positif on modifie la bd et on change la date du vote
         if val_vote == 1:
-            Vote.user_vote = -1
-            Vote.vote_time = datetime(current_timestamp)
+            vote.user_vote = -1
+            vote.vote_time = current_timestamp()
             article.vote_neg += 1
             article.vote_pos -= 1
             db.session.commit()
@@ -92,7 +95,7 @@ def dislike_post(self,article):
             if val < 0:
                 article.vote_pos -= 1
             db.session.commit()
-'''
+
 
 
 def has_voted(self,article):
@@ -159,6 +162,10 @@ def project(article_id):
     article = Article.query.filter_by(article_id=article_id).first()
     poster= Article.query.join(User, Article.poster_id==User.user_id).add_columns(User.name,User.surname).filter(article_id==Article.article_id).first()
     vote = Vote.query.filter(article.article_id == Vote.parent_id).first()
+    if vote == None:
+        print('None')
+    else:
+        print(vote.user_vote)
     return render_template('article.html', article=article, poster=poster, vote=vote)
 
 
@@ -167,6 +174,13 @@ def like_article(article_id):
     article = Article.query.filter_by(article_id=article_id).first()
     user = User.query.filter(User.user_id==session.get('user_id')).first()
     like_post(user,article)
+    return redirect('/project/' + article_id)
+
+@app.route('/project/dislike/<article_id>')
+def dislike_article(article_id):
+    article = Article.query.filter_by(article_id=article_id).first()
+    user = User.query.filter(User.user_id==session.get('user_id')).first()
+    dislike_post(user,article)
     return redirect('/project/' + article_id)
 
 @app.route('/logout')
