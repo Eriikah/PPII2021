@@ -410,3 +410,42 @@ color:rgb(5, 4, 61)
 .ita{
 font-style: italic;
 }
+
+.Infos-perso{
+  text-align: center;
+  vertical-align: middle;
+  background-color: rgb(180, 186, 187);
+  border: solid;
+  align-items: center;
+  margin-top: 5%;
+  margin-left: 5%;
+  font-size: 200%;
+  font-weight: bold;
+  size: 10%;
+}
+
+.Infos-contact{
+  text-align: center;
+  vertical-align: middle;
+  background-color: rgb(80, 199, 223);
+  border: solid;
+  align-items: center;
+  margin-top: 5%;
+  margin-left: 5%;
+  font-size: 200%;
+  font-weight: bold;
+  size: 40%;
+}
+
+.Infos-droits{
+  text-align: center;
+  vertical-align: middle;
+  background-color: rgb(215, 223, 171);
+  border: solid;
+  align-items: center;
+  margin-top: 5%;
+  margin-left: 5%;
+  font-size: 200%;
+  font-weight: bold;
+  size: 10%;
+}

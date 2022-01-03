@@ -1,24 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 {% if 'user_id' in session.keys() %}
-<div class="title1"><p>Informations sur votre profil</p></div>
+<div class="title1"><p>Mon espace profil</p></div>
 <form class="container" method="get">
-<table>
-<tr>
-<h1 class="titleProfile">
-<p class="nom">Votre Nom: {{ user.surname }}</p>
-<p class="prenom">Votre Prénom: {{ user.name }}</p>
-</h1>
-</tr>
-<tr>
+<table class="Infos-perso">
+<tr><td><p class="nom">Votre Nom: {{ user.surname }}</p></td></tr>
+<tr><td><p class="prenom">Votre Prénom: {{ user.name }}</p></td></tr>
+</table>
+<table class="Infos-contact">
 <h2 class="emailProfile">
-<p> Vous êtes enregistré avec l'email: <p class="ita">{{ user.email }}</p></p>
+<tr><td><p>Vous êtes enregistré avec l'email:</p></td></tr>
+<tr><td><p class="ita">{{ user.email }}</p></td></tr>
 </h2>
-</tr>
-<tr>
-<p class="statut"> Votre Statut: {{ user.statut }}</p>
-<p class="role"> Votre Role: {{ user.role }}</p>
-</tr>
+</table>
+<table class="Infos-droits">
+<tr><td><p class="statut"> Votre Statut: {{ user.statut }}</p></td></tr>
+<tr><td><p class="role"> Votre Role: {{ user.role }}</p></td></tr>
 </table>
 </form>
 
@@ -33,5 +30,4 @@
 
 Améliorations:
 Ajouter nombre de publications de l'utilisateur
-Nombre de likes
-Un moyen SECURISE de voir le mot de passe
+(Nombre de likes-dislikes?)
