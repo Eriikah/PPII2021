@@ -10,11 +10,13 @@
     {% else %}
     <img class="imgdesc" src="{{  url_for('static', filename=article.img_link) }} ">
     {% endif %}
+    <div><div class="votes"><div class="votes-title">Pour   </div> <div class="votes-nb"> {{ article.vote_pos }}</div> </div> <div class="votes"> <div class="votes-title">Contre   </div><div class="votes-nb"> {{ article.vote_neg }}</div> </div></div>
     <article class="content">
         {{ article.content }}
         
     </article>
     <div>
+        
         {% if 'user_id' in session.keys() %}
             {% if vote.user_vote == 1 %}
                 <a class="like" href = '/project/like/{{ article.article_id }}'>Pour</a>

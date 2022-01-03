@@ -67,6 +67,7 @@ li {
  }
 
 .button0:hover {
+  cursor: pointer;
   background-color: #7085a1;
   border-radius: 5px;
   transition: 0.3s ease;
@@ -122,6 +123,7 @@ li {
 }
 
 .button1{
+  cursor: pointer;
   background-color: #34179c; 
   border: none;
   color: white;
@@ -172,6 +174,7 @@ li {
 }
 
 .button3 {
+  cursor: pointer;
   background-color: #34179c; 
   border: none;
   color: white;
@@ -191,6 +194,7 @@ li {
 }
 
 .like{
+  cursor: pointer;
   background-color: #34179c; 
   border: none;
   color: white;
@@ -206,6 +210,7 @@ li {
 }
 
 .like_gray{ 
+  cursor: pointer;
   border: none;
   text-align: center;
   text-decoration: none;
@@ -218,6 +223,7 @@ li {
 }
 
 .dislike{
+  cursor: pointer;
   background-color: #d40000; 
   border: none;
   color: white;
@@ -244,6 +250,37 @@ li {
   padding: 1%;
 }
 
+.votes{
+  display: inline-block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-style: ridge;
+  border-color: rgb(37, 77, 77) ;
+  margin: 0%;
+  background-color: #7085a1;
+  padding: 2px;
+  text-align: center;
+  border-radius: 5px;}
+
+.votes-title{
+  display: inline-block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(189, 255, 255) ;
+  margin: 0%;
+  padding: 2px;
+  text-align: center;
+  border-color: #7085a1;
+
+}
+
+.votes-nb{
+  display: inline-block;
+  background: #fff;
+  border-style: solid;
+  border-color: rgb(255, 255, 255) ;
+  color: rgb(37, 77, 77) ;
+  margin: 2px;
+  background-size: 200px;
+}
 
 .no_connect{
   text-align: center;
