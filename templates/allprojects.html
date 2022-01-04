@@ -4,11 +4,11 @@
     
 <div class="filterbox">
     
-    <form method="post"> Trier par:
+    <form method="get"> Trier par:
         <ul>
-            <label for="mytag">Tags</label>
-            <select class="tags" name="mytag" id="tags">
-                <option value="">--Please choose a tag--</option>
+            <label for="tag">Tags</label>
+            <select class="tags" name="tag" id="tags">
+                <option value="">{{ current_tag or '--Please choose a tag--' }}</option>
                 {% for tag in tags %}
                     <option>{{ tag.tag_name }}</option>
                 {% endfor %}

@@ -239,15 +239,15 @@ def publier():
     return render_template('postpage.html')
 
 
-@app.route("/projects", methods = ['GET','POST'])
+@app.route("/projects")
 def listproject():
     articles = Article.query.all()
     tags=Tags.query.all()
-    if request.method == "POST":
-        tagsearched=request.form.get('mytag')
-        results= Article.query.filter(or_(tagsearched==Article.tag1,tagsearched==Article.tag2,tagsearched==Article.tag3))
-        return render_template('allprojects.html',articles=results, tags=tags)
-    return render_template('allprojects.html',articles=articles, tags=tags, logged_in='user_id' in session.keys(), status=session.get('statut'))
+    searched_tag = request.args.get('tag')
+    if searched_tag is not None:
+        results= Article.query.filter(or_(searched_tag==Article.tag1,searched_tag==Article.tag2,searched_tag==Article.tag3))
+        return render_template('allprojects.html',articles=results, tags=tags, current_tag=searched_tag)
+    return render_template('allprojects.html',articles=articles, tags=tags)
 
 @app.route("/profile", methods = ['GET','POST'])
 def pageprofil():
