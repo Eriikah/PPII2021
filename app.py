@@ -54,8 +54,7 @@ def like_post(self,article):
         # si le vote était positif on supprime le vote
         else:
             Vote.query.filter_by(user_id=self.user_id, parent_id=article.article_id).delete()
-            if val > 0:
-                Article.vote_pos -= 1
+            article.vote_pos -= 1
             db.session.commit()
 
 
@@ -92,8 +91,7 @@ def dislike_post(self,article):
         # si le vote était négatif on supprime le vote
         else:
             Vote.query.filter_by(user_id=self.user_id, parent_id=article.article_id).delete()
-            if val < 0:
-                article.vote_pos -= 1
+            article.vote_neg -= 1
             db.session.commit()
 
 
@@ -302,7 +300,6 @@ def search():
         results= Article.query.filter(or_(tagsearched==Article.tag1,tagsearched==Article.tag2,tagsearched==Article.tag3))
         return render_template('allprojects.html',articles=results, tags=tags)
     return render_template('allprojects.html',articles=results, tags=tags)
-    return search_terms
 
 @app.route('/noresult')
 def noresult():
