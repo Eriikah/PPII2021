@@ -235,7 +235,6 @@ def publier():
             db.session.add(post)
             db.session.commit()
             return redirect("/projects")
-
     return render_template('postpage.html')
 
 
@@ -244,10 +243,11 @@ def listproject():
     articles = Article.query.all()
     tags=Tags.query.all()
     searched_tag = request.args.get('tag')
+    sort_method = request.args.get('sort')
     if searched_tag is not None:
         results= Article.query.filter(or_(searched_tag==Article.tag1,searched_tag==Article.tag2,searched_tag==Article.tag3))
-        return render_template('allprojects.html',articles=results, tags=tags, current_tag=searched_tag)
-    return render_template('allprojects.html',articles=articles, tags=tags)
+    return render_template('allprojects.html',articles=results, tags=tags, current_tag=searched_tag, current_sort=sort_method)
+
 
 @app.route("/profile", methods = ['GET','POST'])
 def pageprofil():

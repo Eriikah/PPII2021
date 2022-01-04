@@ -3,19 +3,24 @@
 <div class="wrapper">
     
 <div class="filterbox">
-    
-    <form method="get"> Trier par:
-        <ul>
+    <ul>
+    <form method="get">
             <label for="tag">Tags</label>
             <select class="tags" name="tag" id="tags">
-                <option value="">{{ current_tag or '--Please choose a tag--' }}</option>
+                <option value="">{{ current_tag or '--Choisissez un tag--' }}</option>
                 {% for tag in tags %}
                     <option>{{ tag.tag_name }}</option>
                 {% endfor %}
             </select>
+            <label for="sort_form">Trier par</label>
+            <select class="tags" name="sort" id="sort_form">
+                <option value="">{{ current_sort or '--Trier par--' }}</option>
+                <option>Pertinence</option>
+                <option>Date</option>
+            </select>
             <button type="submit" class="button3">Go</button>
-        </ul>
     </form>
+    </ul>
 </div>
 <div class="articles">
     
