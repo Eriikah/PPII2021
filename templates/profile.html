@@ -1,28 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 {% if 'user_id' in session.keys() %}
-<div class="title1"><p>Mon espace profil</p></div>
+
 <form class="container" method="post">
-<table class="Infos-perso">
-<tr><td><p class="nom">Votre Nom: {{ user.surname }}</p> Modifiez votre nom: <input class="textbox" type="text" name="name" id="name_input" placeholder='New name'> </td></tr>
-<tr><td><p class="prenom">Votre Prénom: {{ user.name }}</p> Modifiez votre prénom: <input class="textbox" type="text" name="surname" id="surname_input" placeholder='New surname'></td></tr>
-</table>
-<table class="Infos-contact">
-<h2 class="emailProfile">
+<table class="Infos-profile">
+<tr><td><div class="title1">Mon espace profil</div></td></tr>
+<tr><td><p>Votre Nom: {{ user.surname }}</p> Modifiez votre nom: <input class="textbox" type="text" name="name" id="name_input" placeholder='New surname'> </td></tr>
+<tr><td><p>Votre Prénom: {{ user.name }}</p> Modifiez votre prénom: <input class="textbox" type="text" name="surname" id="surname_input" placeholder='New name'></td></tr>
 <tr><td><p>Vous êtes enregistré avec l'email:</p></td></tr>
 <tr><td><p class="ita">{{ user.email }}</p></td></tr>
 <tr><td> Modifiez votre email: <input class="textbox" type="email" name="email" id="email_input" placeholder='New email'> </td></tr>
-</h2>
+<tr><td> <p></p>Votre Statut est {{ user.statut }} et votre rôle est {{ user.role }}<p></p></td></tr>
+<tr><td>  
+<div>Redonnez votre mot de passe ou créez-en un nouveau</div>
+<input class="textbox" type="password" name="password" id="pwd_input" placeholder='New password'>
+<input class="textbox" type="password" name="re_password" id="re_pwd_input" placeholder='Confirm new password'>
+<p><button class="button1" type="submit">Mettre à jour vos données</button></p>
+</td></tr>
 </table>
-<table class="Infos-droits">
-<tr><td><p class="statut"> Votre Statut: {{ user.statut }}</p></td></tr>
-<tr><td><p class="role"> Votre Role: {{ user.role }}</p></td></tr>
-</table>
-    <div><input class="textbox" type="password" name="password" id="pwd_input" placeholder='New password'></div>
-    <div><input class="textbox" type="password" name="re_password" id="re_pwd_input" placeholder='Confirm new password'></div>
-    <div><button class="button1" type="submit">Mettre à jour cos données</button></div>
 </form>
-
 
 {% else %}
 
@@ -32,7 +28,3 @@
 {% endif %}
 
 {% endblock %}
-
-Améliorations:
-Ajouter nombre de publications de l'utilisateur
-(Nombre de likes-dislikes?)

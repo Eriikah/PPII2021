@@ -391,61 +391,19 @@ font-family: 'Courier New', Courier, monospace;
 font-style: italic;
 }
 
-.nom{
-color: red;
-}
-
-.prenom{
-color: orangered;
-}
-
-.statut{
-color:rgb(14, 12, 134)
-}
-
-.role{
-color:rgb(5, 4, 61)
-}
-
 .ita{
 font-style: italic;
 }
 
-.Infos-perso{
+.Infos-profile{
+  background-color: rgb(233, 236, 255);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 10%;
   text-align: center;
-  vertical-align: middle;
-  background-color: rgb(180, 186, 187);
-  border: solid;
-  align-items: center;
-  margin-top: 5%;
-  margin-left: 5%;
-  font-size: 100%;
-  font-weight: bold;
-  size: 10%;
-}
-
-.Infos-contact{
-  text-align: center;
-  vertical-align: middle;
-  background-color: rgb(80, 199, 223);
-  border: solid;
-  align-items: center;
-  margin-top: 5%;
-  margin-left: 5%;
-  font-size: 100%;
-  font-weight: bold;
-  size: 40%;
-}
-
-.Infos-droits{
-  text-align: center;
-  vertical-align: middle;
-  background-color: rgb(215, 223, 171);
-  border: solid;
-  align-items: center;
-  margin-top: 5%;
-  margin-left: 5%;
-  font-size: 100%;
-  font-weight: bold;
-  size: 10%;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0px 5px 5px grey;
+  transition: box-shadow 0.2s;
+  margin-left:auto;
+  margin-right:auto;
 }
