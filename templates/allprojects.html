@@ -19,12 +19,11 @@
             </select>
             <label for="sort_form">Trier par</label>
             <select class="tags" name="sort" id="sort_form">
-                <option value="">{{ current_sort or '--Trier par--' }}</option>
-                {% if current_sort != "Pertinence" %}
-                    <option>Pertinence</option>
-                {% endif %}
-                {% if current_sort != "Date" %}
+                <option>{{ current_sort or 'Pertinence' }}</option>
+                {% if current_sort == "Pertinence" %}
                     <option>Date</option>
+                {% else %}
+                    <option>Pertinence</option>
                 {% endif %}
             </select>
             <button type="submit" class="button3">Go</button>
