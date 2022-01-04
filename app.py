@@ -29,13 +29,15 @@ def like_post(self,article):
         id = 1
     else:
         id = idmax + 1
-
+    tags = [article.tag1, article.tag2, article.tag3]
     # si pas déja voté on ajoute un vote direct
     if not has_voted(self,article):
         new_vote = Vote(vote_id=id, vote_on=article.title, parent_id=article.article_id, user_id =self.user_id, user_vote=1, vote_time=current_timestamp())
         article.vote_pos += 1
         db.session.add(new_vote)
         db.session.commit()
+        for tag in tags:
+            add_item_to_cookies(tag, 3)
 
     # si déja voté on récupère la valeur de vote total sur l'article et le contenue du vote
     else:
@@ -50,12 +52,16 @@ def like_post(self,article):
             article.vote_pos += 1
             article.vote_neg -= 1
             db.session.commit()
+            for tag in tags:
+                add_item_to_cookies(tag, 6)
 
         # si le vote était positif on supprime le vote
         else:
             Vote.query.filter_by(user_id=self.user_id, parent_id=article.article_id).delete()
             article.vote_pos -= 1
             db.session.commit()
+            for tag in tags:
+                add_item_to_cookies(tag, -3)
 
 
 
@@ -66,13 +72,15 @@ def dislike_post(self,article):
         id = 1
     else:
         id = idmax + 1
-
+    tags = [article.tag1, article.tag2, article.tag3]
     # si pas déja voté on ajoute un vote direct
     if not has_voted(self,article):
         new_vote = Vote(vote_id=id, vote_on=article.title, parent_id=article.article_id, user_id =self.user_id, user_vote=-1, vote_time=current_timestamp())
         article.vote_neg += 1
         db.session.add(new_vote)
         db.session.commit()
+        for tag in tags:
+            add_item_to_cookies(tag, -3)
 
     # si déja voté on récupère la valeur de vote total sur l'article et le contenue du vote
     else:
@@ -87,12 +95,16 @@ def dislike_post(self,article):
             article.vote_neg += 1
             article.vote_pos -= 1
             db.session.commit()
+            for tag in tags:
+                add_item_to_cookies(tag, -6)
 
         # si le vote était négatif on supprime le vote
         else:
             Vote.query.filter_by(user_id=self.user_id, parent_id=article.article_id).delete()
             article.vote_neg -= 1
             db.session.commit()
+            for tag in tags:
+                add_item_to_cookies(tag, 3)
 
 
 
@@ -100,10 +112,28 @@ def has_voted(self,article):
     # répond True si il existe un vote avec l'id de l'utilisateur connecté et l'id de l'article
     return Vote.query.filter_by(user_id=self.user_id, parent_id=article.article_id).count() > 0
 
+
+def add_item_to_cookies(item, coef):
+    curr_user_id = session.get('user_id')
+    if curr_user_id is not None:
+        user_cookies = None
+        with open('pertinence_cookies', 'rb') as pc:
+            pertinence_cookies = pickle.load(pc)
+            user_cookies = pertinence_cookies.get(curr_user_id) or {} # sets the cookies to an empty dict if they are None
+        if item not in user_cookies.keys():
+            user_cookies[item] = coef
+        else:
+            user_cookies[item] += coef
+        pertinence_cookies[curr_user_id] = user_cookies
+        with open('pertinence_cookies', 'wb') as pc:
+            pickle.dump(pertinence_cookies, pc)
+
+
 @app.route('/')
 def home():
     articles = Article.query.all()
     return render_template('home.html',articles=articles)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -170,6 +200,7 @@ def like_article(article_id):
     like_post(user,article)
     return redirect('/project/' + article_id)
 
+
 @app.route('/project/dislike/<article_id>')
 def dislike_article(article_id):
     article = Article.query.filter_by(article_id=article_id).first()
@@ -177,11 +208,13 @@ def dislike_article(article_id):
     dislike_post(user,article)
     return redirect('/project/' + article_id)
 
+
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
     session.pop('statut', None)
     return redirect('/')
+
 
 @app.route("/postpage", methods=['GET', 'POST'])
 def publier():
@@ -240,12 +273,13 @@ def publier():
 
 @app.route("/projects")
 def listproject():
-    articles = Article.query.all()
+    results = Article.query.all()
     tags=Tags.query.all()
     searched_tag = request.args.get('tag')
     sort_method = request.args.get('sort')
     if searched_tag is not None:
-        results= Article.query.filter(or_(searched_tag==Article.tag1,searched_tag==Article.tag2,searched_tag==Article.tag3))
+        add_item_to_cookies(searched_tag, 2)
+        results = Article.query.filter(or_(searched_tag==Article.tag1,searched_tag==Article.tag2,searched_tag==Article.tag3))
     return render_template('allprojects.html',articles=results, tags=tags, current_tag=searched_tag, current_sort=sort_method)
 
 
@@ -270,23 +304,10 @@ def pageprofil():
     
     return render_template('profile.html' , user=user)
 
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     search_terms = request.args.get('search')
-    curr_user_id = session.get('user_id')
-    if curr_user_id is not None:
-        user_cookies = None
-        with open('pertinence_cookies', 'rb') as pc:
-            pertinence_cookies = pickle.load(pc)
-            user_cookies = pertinence_cookies.get(curr_user_id) or {} # sets the cookies to an empty dict if they are None
-        for term in search_terms.split():
-            if term not in user_cookies.keys():
-                user_cookies[term] = 1
-            else:
-                user_cookies[term] += 1
-        pertinence_cookies[curr_user_id] = user_cookies
-        with open('pertinence_cookies', 'wb') as pc:
-            pickle.dump(pertinence_cookies, pc)
     terms=search_terms.split() 
     filter=[(or_(Article.tag1.contains(term),Article.tag2.contains(term),Article.tag3.contains(term),Article.title.contains(term),Article.content.contains(term),Article.description.contains(term))) for term in terms]
     query=Article.query.filter(or_(*filter))
@@ -299,7 +320,14 @@ def search():
         tagsearched=request.form.get('mytag')
         results= Article.query.filter(or_(tagsearched==Article.tag1,tagsearched==Article.tag2,tagsearched==Article.tag3))
         return render_template('allprojects.html',articles=results, tags=tags)
+    returned_tags = set()
+    for article in results:
+        for tag in [article.tag1, article.tag2, article.tag3]:
+            returned_tags.add(tag)
+    for tag in returned_tags:
+        add_item_to_cookies(tag, 2)
     return render_template('allprojects.html',articles=results, tags=tags)
+
 
 @app.route('/noresult')
 def noresult():
