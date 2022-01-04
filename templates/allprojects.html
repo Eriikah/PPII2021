@@ -9,14 +9,23 @@
             <select class="tags" name="tag" id="tags">
                 <option value="">{{ current_tag or '--Choisissez un tag--' }}</option>
                 {% for tag in tags %}
-                    <option>{{ tag.tag_name }}</option>
+                    {% if tag.tag_name != current_tag %}
+                        <option>{{ tag.tag_name }}</option>
+                    {% endif %}
                 {% endfor %}
+                {% if current_tag %}
+                    <option value="">Pas de tag</option>
+                {% endif %}
             </select>
             <label for="sort_form">Trier par</label>
             <select class="tags" name="sort" id="sort_form">
                 <option value="">{{ current_sort or '--Trier par--' }}</option>
-                <option>Pertinence</option>
-                <option>Date</option>
+                {% if current_sort != "Pertinence" %}
+                    <option>Pertinence</option>
+                {% endif %}
+                {% if current_sort != "Date" %}
+                    <option>Date</option>
+                {% endif %}
             </select>
             <button type="submit" class="button3">Go</button>
     </form>
