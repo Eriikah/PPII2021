@@ -251,11 +251,25 @@ def listproject():
         return render_template('allprojects.html',articles=results, tags=tags)
     return render_template('allprojects.html',articles=articles, tags=tags, logged_in='user_id' in session.keys(), status=session.get('statut'))
 
-@app.route("/profile", methods = ['GET'])
+@app.route("/profile", methods = ['GET','POST'])
 def pageprofil():
     if session.get('user_id') is None:
         return render_template('profile.html',user=None)
     user = User.query.filter(User.user_id==session.get('user_id')).first()
+    if request.method == "POST":
+        user.name = request.form['name']
+        user.surname = request.form['surname']
+        user.email = request.form['email']
+        user.password = request.form['password']
+        if request.form['re_password'] != user.password:
+            return abort(400)
+        else:
+            hash = sha256()
+            hash.update(user.password.encode('utf-8'))
+            hashed_pwd = hash.hexdigest()
+            db.session.commit()
+        return redirect("/")
+    
     return render_template('profile.html' , user=user)
 
 @app.route('/search', methods=['GET', 'POST'])
