@@ -277,9 +277,22 @@ def listproject():
     tags=Tags.query.all()
     searched_tag = request.args.get('tag')
     sort_method = request.args.get('sort')
+    user_id = session.get('user_id')
     if searched_tag is not None:
         add_item_to_cookies(searched_tag, 2)
         results = Article.query.filter(or_(searched_tag==Article.tag1,searched_tag==Article.tag2,searched_tag==Article.tag3))
+    if user_id and (sort_method == 'Pertinence' or not sort_method):
+        with open('pertinence_cookies', 'rb') as pc:
+            pertinence_settings = pickle.load(pc).get(user_id) or {}
+        res_ranking = {}
+        for res in results:
+            res_score = 0
+            for tag in [res.tag1, res.tag2, res.tag3]:
+                score = pertinence_settings.get(tag)
+                if score is not None:
+                    res_score += score
+            res_ranking[res] = res_score
+        results.sort(key=lambda r: res_ranking[r], reverse=True)
     return render_template('allprojects.html',articles=results, tags=tags, current_tag=searched_tag, current_sort=sort_method)
 
 
