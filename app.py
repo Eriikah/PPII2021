@@ -292,13 +292,14 @@ def pageprofil():
         user.name = request.form['name']
         user.surname = request.form['surname']
         user.email = request.form['email']
-        user.password = request.form['password']
-        if request.form['re_password'] != user.password:
+        pwd = request.form['password']
+        if request.form['re_password'] != pwd:
             return abort(400)
         else:
             hash = sha256()
-            hash.update(user.password.encode('utf-8'))
+            hash.update(pwd.encode('utf-8'))
             hashed_pwd = hash.hexdigest()
+            user.password_hash = hashed_pwd
             db.session.commit()
         return redirect("/")
     
