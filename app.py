@@ -132,6 +132,18 @@ def add_item_to_cookies(item, coef):
 @app.route('/')
 def home():
     articles = Article.query.order_by(desc(Article.post_time)).limit(3).all()
+    if session.get('user_id'):
+        with open('pertinence_cookies', 'rb') as pc:
+            pertinence_settings = pickle.load(pc).get(session.get('user_id')) or {}
+        art_ranking = {}
+        for art in articles:
+            art_score = 0
+            for tag in [art.tag1, art.tag2, art.tag3]:
+                score = pertinence_settings.get(tag)
+                if score is not None:
+                    art_score += score
+            art_ranking[art] = art_score
+        articles.sort(key=lambda a: art_ranking[a], reverse=True)
     return render_template('home.html',articles=articles)
 
 
