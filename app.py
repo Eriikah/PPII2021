@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import render_template, request, abort, url_for, session, redirect
 from hashlib import sha256
 from datetime import datetime
-from sqlalchemy import or_
+from sqlalchemy import or_, desc
 import pickle
 
 from sqlalchemy.orm import query
@@ -190,6 +190,8 @@ def project(article_id):
     article = Article.query.filter_by(article_id=article_id).first()
     poster= Article.query.join(User, Article.poster_id==User.user_id).add_columns(User.name,User.surname).filter(article_id==Article.article_id).first()
     vote = Vote.query.filter(article.article_id == Vote.parent_id).first()
+    for tag in [article.tag1, article.tag2, article.tag3]:
+        add_item_to_cookies(tag, 1)
     return render_template('article.html', article=article, poster=poster, vote=vote)
 
 
@@ -273,15 +275,15 @@ def publier():
 
 @app.route("/projects")
 def listproject():
-    results = Article.query.all()
+    results = Article.query.order_by(desc(Article.post_time)).all()
     tags=Tags.query.all()
     searched_tag = request.args.get('tag')
-    sort_method = request.args.get('sort')
+    sort_method = request.args.get('sort', 'Pertinence')
     user_id = session.get('user_id')
-    if searched_tag is not None:
+    if searched_tag:
         add_item_to_cookies(searched_tag, 2)
-        results = Article.query.filter(or_(searched_tag==Article.tag1,searched_tag==Article.tag2,searched_tag==Article.tag3))
-    if user_id and (sort_method == 'Pertinence' or not sort_method):
+        results = Article.query.filter(or_(searched_tag==Article.tag1,searched_tag==Article.tag2,searched_tag==Article.tag3)).all()
+    if user_id and (sort_method == 'Pertinence'):
         with open('pertinence_cookies', 'rb') as pc:
             pertinence_settings = pickle.load(pc).get(user_id) or {}
         res_ranking = {}
@@ -292,6 +294,7 @@ def listproject():
                 if score is not None:
                     res_score += score
             res_ranking[res] = res_score
+        print(res_ranking)
         results.sort(key=lambda r: res_ranking[r], reverse=True)
     return render_template('allprojects.html',articles=results, tags=tags, current_tag=searched_tag, current_sort=sort_method)
 
