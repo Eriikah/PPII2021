@@ -131,7 +131,7 @@ def add_item_to_cookies(item, coef):
 
 @app.route('/')
 def home():
-    articles = Article.query.all()
+    articles = Article.query.order_by(desc(Article.post_time)).limit(3).all()
     return render_template('home.html',articles=articles)
 
 
